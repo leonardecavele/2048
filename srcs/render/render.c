@@ -6,7 +6,7 @@
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/25 02:37:28 by ldecavel          #+#    #+#             */
-/*   Updated: 2026/04/25 16:24:33 by ldecavel         ###   ########.fr       */
+/*   Updated: 2026/04/25 16:52:28 by ldecavel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,10 +74,18 @@ extern void render_invalid_ratio(t_app *app)
 	print_centered(app, r / 2, "Windows has an invalid ratio");
 }
 
-extern bool screen_ratio_is_bad(t_app *app)
+extern bool	screen_ratio_is_bad(t_app *app)
 {
-	int r = app->screen.rows;
-	int c = app->screen.cols;
+	int	r;
+	int	c;
 
-	return (r * 10 > c * 16 || c * 10 > r * 20);
+	r = app->screen.rows;
+	c = app->screen.cols;
+	if ((long)c * MAX_WIDTH_RATIO_DEN
+		> (long)r * MAX_WIDTH_RATIO_NUM * TERM_CHAR_RATIO)
+		return (true);
+	if ((long)c * MIN_WIDTH_RATIO_DEN
+		< (long)r * MIN_WIDTH_RATIO_NUM)
+		return (true);
+	return (false);
 }
