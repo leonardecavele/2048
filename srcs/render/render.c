@@ -6,7 +6,7 @@
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/25 02:37:28 by ldecavel          #+#    #+#             */
-/*   Updated: 2026/04/25 15:29:16 by ldecavel         ###   ########.fr       */
+/*   Updated: 2026/04/25 16:24:33 by ldecavel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,9 @@
 /* intern */
 #include "error.h"
 #include "render.h"
+#include "libft.h"
+#include "app.h"
+#include "helpers.h"
 
 extern void handle_resize(void)
 {
@@ -43,4 +46,38 @@ extern t_errcode ncurses_init(void)
 
 	refresh();
 	return (NO_ERROR);
+}
+
+extern void print_centered(t_app *app, int y, const char *str)
+{
+	int c = app->screen.cols;
+	int x = max(0, (c - (int)ft_strlen(str)) / 2);
+
+	mvprintw(y, x, "%s", str);
+}
+
+extern void render_too_small(t_app *app)
+{
+	int r = app->screen.rows;
+	int c = app->screen.cols;
+
+	(void)c;
+	print_centered(app, r / 2, "Windows too small, please increase size");
+}
+
+extern void render_invalid_ratio(t_app *app)
+{
+	int r = app->screen.rows;
+	int c = app->screen.cols;
+
+	(void)c;
+	print_centered(app, r / 2, "Windows has an invalid ratio");
+}
+
+extern bool screen_ratio_is_bad(t_app *app)
+{
+	int r = app->screen.rows;
+	int c = app->screen.cols;
+
+	return (r * 10 > c * 16 || c * 10 > r * 20);
 }

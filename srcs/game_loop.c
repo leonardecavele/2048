@@ -6,7 +6,7 @@
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/25 02:38:23 by ldecavel          #+#    #+#             */
-/*   Updated: 2026/04/25 15:24:57 by ldecavel         ###   ########.fr       */
+/*   Updated: 2026/04/25 15:31:22 by ldecavel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ extern void game_loop(void) {
 	};
 	init_board(app.board);
 
-	app.current_view = &app.game_view;
+	app.current_view = &app.menu_view;
 	while (!must_exit() && app.user_input != 27)
 	{
 		if (must_resize())

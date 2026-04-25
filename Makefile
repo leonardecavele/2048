@@ -22,7 +22,8 @@ SRCS = \
 	signals.c \
 	error.c \
 	gameplay.c \
-	game_loop.c
+	game_loop.c \
+	helpers.c
 
 OBJS = $(SRCS:%.c=$(BUILD_DIR)/%.o)
 DEPS = $(OBJS:.o=.d)

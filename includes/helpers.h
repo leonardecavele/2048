@@ -1,35 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   render.h                                           :+:      :+:    :+:   */
+/*   helpers.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/25 12:21:20 by ldecavel          #+#    #+#             */
-/*   Updated: 2026/04/25 16:28:12 by ldecavel         ###   ########.fr       */
+/*   Created: 2026/04/25 16:01:47 by ldecavel          #+#    #+#             */
+/*   Updated: 2026/04/25 16:03:14 by ldecavel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef RENDER_H
-#define RENDER_H
+#ifndef HELPERS_H
+#define HELPERS_H
 
-#include "error.h"
+#include <stdint.h>
 
-#define MIN_COL 21
-#define MIN_ROW 21
-
-typedef struct s_app t_app;
-
-typedef struct s_screen {
-	int rows;
-	int cols;
-}	t_screen;
-
-t_errcode ncurses_init(void);
-void handle_resize(void);
-void render_too_small(t_app *app);
-void render_invalid_ratio(t_app *app);
-void print_centered(t_app *app, int y, const char *str);
-bool screen_ratio_is_bad(t_app *app);
+int64_t	max(int64_t a, int64_t b);
 
 #endif
