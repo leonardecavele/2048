@@ -19,11 +19,12 @@ SRCS = \
 	main.c \
 	error.c \
 	signals.c \
-	game_loop.c \
+	app_loop.c \
 	helpers.c \
 	render/render.c \
 	views/menu.c \
 	views/game.c \
+	views/end.c \
 	gameplay/board.c \
 	gameplay/moves.c \
 	gameplay/utils.c \

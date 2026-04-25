@@ -6,7 +6,7 @@
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/25 02:55:00 by ldecavel          #+#    #+#             */
-/*   Updated: 2026/04/25 13:43:14 by ldecavel         ###   ########.fr       */
+/*   Updated: 2026/04/25 17:05:07 by ldecavel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,9 @@ void game_render(t_app *app);
 /* menu */
 void menu_update(t_app *app);
 void menu_render(t_app *app);
+
+/* end */
+void end_update(t_app *app);
+void end_render(t_app *app);
 
 #endif

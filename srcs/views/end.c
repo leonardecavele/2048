@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   menu.c                                             :+:      :+:    :+:   */
+/*   end.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/25 02:58:57 by ldecavel          #+#    #+#             */
-/*   Updated: 2026/04/25 16:58:32 by ldecavel         ###   ########.fr       */
+/*   Updated: 2026/04/25 17:04:37 by ldecavel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include "gameplay.h"
 #include "app.h"
 
-extern void menu_update(t_app *app)
+extern void end_update(t_app *app)
 {
 	app->user_input = getch();
 
@@ -26,30 +26,10 @@ extern void menu_update(t_app *app)
 	if (app->user_input == '\n'
 		|| app->user_input == '\r'
 		|| app->user_input == KEY_ENTER)
-		app->current_view = &app->game_view;
+		app->user_input = 27;
 }
 
-static void render_title(t_app *app, int y)
-{
-	print_centered(app, y + 0,  "  ___   ___  _  _  ___  ");
-	print_centered(app, y + 1,  " |__ \\ / _ \\| || ||__ \\ ");
-	print_centered(app, y + 2,  "    ) | | | | || |_  ) |");
-	print_centered(app, y + 3,  "   / /| | | |__   _|/ / ");
-	print_centered(app, y + 4,  "  / /_| |_| |  | | / /_ ");
-	print_centered(app, y + 5,  " |____|\\___/   |_||____|");
-}
-
-static void	render_play_button(t_app *app, int y)
-{
-	print_centered(app, y - 1, "              ");
-	attron(A_REVERSE | A_BOLD);
-	print_centered(app, y + 0, "     PLAY     ");
-	attroff(A_REVERSE | A_BOLD);
-	print_centered(app, y + 1, "              ");
-}
-
-
-extern void menu_render(t_app *app)
+extern void end_render(t_app *app)
 {
 	getmaxyx(stdscr, app->screen.rows, app->screen.cols);
 
@@ -66,6 +46,5 @@ extern void menu_render(t_app *app)
 		return;
 	}
 
-	render_title(app, r / 5);
-	render_play_button(app, (r / 5) * 3.5);
+	/* render func */
 }
