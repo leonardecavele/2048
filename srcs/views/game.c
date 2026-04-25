@@ -6,7 +6,7 @@
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/25 02:57:57 by ldecavel          #+#    #+#             */
-/*   Updated: 2026/04/25 17:34:10 by ldecavel         ###   ########.fr       */
+/*   Updated: 2026/04/25 17:40:19 by ldecavel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,21 +47,8 @@ extern void game_update(t_app *app)
 	}
 }
 
-static int	nbr_len(t_cell nbr)
-{
-	int	len = 0;
 
-	if (nbr == 0)
-		return (1);
-
-	while (nbr > 0) {
-		nbr /= 10;
-		len++;
-	}
-	return (len);
-}
-
-static void	render_board_values(
+static void	draw_board_values(
 	t_app *app, int start_y, int start_x, int cell_h, int cell_w
 )
 {
@@ -79,7 +66,7 @@ static void	render_board_values(
 		{
 			if (app->board[y][x] != 0)
 			{
-				len = nbr_len(app->board[y][x]);
+				len = nbrlen(app->board[y][x]);
 				value_y = start_y + y * cell_h + cell_h / 2;
 				value_x = start_x + x * cell_w + (cell_w - len) / 2;
 				mvprintw(value_y, value_x, "%u",
@@ -158,7 +145,7 @@ static void	draw_grid_joints(int start_y, int start_x, int cell_h, int cell_w)
 	}
 }
 
-static void	render_board_grid(t_app *app)
+static void	render_board(t_app *app)
 {
 	int r = app->screen.rows;
 	int c = app->screen.cols;
@@ -174,11 +161,9 @@ static void	render_board_grid(t_app *app)
 	int start_x = (c - board_w) / 2;
 	int start_y = (r - board_h) / 2;
 
-	erase();
 	draw_grid_lines(start_y, start_x, cell_h, cell_w);
 	draw_grid_joints(start_y, start_x, cell_h, cell_w);
-	render_board_values(app, start_y, start_x, cell_h, cell_w);
-	refresh();
+	draw_board_values(app, start_y, start_x, cell_h, cell_w);
 }
 
 
@@ -199,5 +184,7 @@ extern void game_render(t_app *app)
 		return;
 	}
 
-	render_board_grid(app);
+	erase();
+	render_board(app);
+	refresh();
 }

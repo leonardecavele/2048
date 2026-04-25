@@ -6,7 +6,7 @@
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/25 16:01:47 by ldecavel          #+#    #+#             */
-/*   Updated: 2026/04/25 17:23:56 by ldecavel         ###   ########.fr       */
+/*   Updated: 2026/04/25 17:39:09 by ldecavel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,5 +17,6 @@
 
 int64_t	max(int64_t a, int64_t b);
 int64_t	min(int64_t a, int64_t b);
+int nbrlen(int64_t nbr);
 
 #endif
