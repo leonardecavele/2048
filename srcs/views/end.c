@@ -6,7 +6,7 @@
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/25 02:58:57 by ldecavel          #+#    #+#             */
-/*   Updated: 2026/04/25 17:04:37 by ldecavel         ###   ########.fr       */
+/*   Updated: 2026/04/25 17:32:36 by ldecavel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,6 @@ extern void end_render(t_app *app)
 		render_invalid_ratio(app);
 		return;
 	}
-
+	
 	/* render func */
 }
