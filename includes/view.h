@@ -6,7 +6,7 @@
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/25 02:55:00 by ldecavel          #+#    #+#             */
-/*   Updated: 2026/04/25 02:57:02 by ldecavel         ###   ########.fr       */
+/*   Updated: 2026/04/25 03:04:15 by ldecavel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,5 +21,13 @@ typedef struct s_view
 	void (*update)(void);
 	void (*render)(void);
 }	t_view;
+
+/* game */
+void game_update(void);
+void game_render(void);
+
+/* menu */
+void menu_update(void);
+void menu_render(void);
 
 #endif

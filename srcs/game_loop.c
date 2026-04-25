@@ -6,11 +6,12 @@
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/25 02:38:23 by ldecavel          #+#    #+#             */
-/*   Updated: 2026/04/25 03:00:04 by ldecavel         ###   ########.fr       */
+/*   Updated: 2026/04/25 03:05:04 by ldecavel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
+/* intern imports */
+#include "view.h"
 
 /* pour la boucle principale stabilisee a 60 fps */
 /* bien essayer de separer temps / gameplay / display */
@@ -23,11 +24,12 @@
    etc ...
 */
 
-void game_loop(void) {
+extern void game_loop(void) {
 	t_view	menu_view = {.update = menu_update, .render = menu_render};
 	t_view	game_view = {.update = game_update, .render = game_render};
 
 	t_view	*current_view = &menu_view;
+	(void)game_view;
 	while (1)
 	{
 		current_view->update();

@@ -6,16 +6,16 @@
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/25 02:57:57 by ldecavel          #+#    #+#             */
-/*   Updated: 2026/04/25 02:57:59 by ldecavel         ###   ########.fr       */
+/*   Updated: 2026/04/25 03:07:07 by ldecavel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-void	game_update(void)
+extern void game_update(void)
 {
 	/* logique du jeu */
 }
 
-void	game_render(void)
+extern void game_render(void)
 {
 	/* affichage du jeu */
 }
