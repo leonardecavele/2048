@@ -6,7 +6,7 @@
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/25 01:51:37 by ldecavel          #+#    #+#             */
-/*   Updated: 2026/04/25 13:32:00 by ldecavel         ###   ########.fr       */
+/*   Updated: 2026/04/25 17:07:29 by ldecavel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 #include "error.h"
 #include "render.h"
 #include "signals.h"
-#include "game_loop.h"
+#include "app_loop.h"
 
 
 int	main(void)
@@ -33,7 +33,7 @@ int	main(void)
 	errcode |= signals_init();
 	if (errcode == NO_ERROR) {
 		srand(time(NULL));
-		game_loop();
+		app_loop();
 	}
 
 	endwin();
