@@ -1,32 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   view.h                                             :+:      :+:    :+:   */
+/*   signals.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/25 02:55:00 by ldecavel          #+#    #+#             */
-/*   Updated: 2026/04/25 13:43:14 by ldecavel         ###   ########.fr       */
+/*   Created: 2026/04/25 11:58:01 by ldecavel          #+#    #+#             */
+/*   Updated: 2026/04/25 12:36:56 by ldecavel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef VIEW_H
-#define VIEW_H
+#ifndef SIGNALS_H
+#define SIGNALS_H
 
-typedef struct s_app t_app;
+#include <signal.h>
+#include <stdbool.h>
 
-typedef struct s_view
-{
-	void (*update)(t_app *app);
-	void (*render)(t_app *app);
-}	t_view;
+typedef enum e_signals {
+	SIGNAL_RESIZE = (1 << 0),
+	SIGNAL_EXIT = (1 << 1)
+}	t_signals;
 
-/* game */
-void game_update(t_app *app);
-void game_render(t_app *app);
-
-/* menu */
-void menu_update(t_app *app);
-void menu_render(t_app *app);
+t_errcode signals_init(void);
+bool must_exit(void);
+bool must_resize(void);
 
 #endif

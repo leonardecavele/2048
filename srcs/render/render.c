@@ -6,15 +6,41 @@
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/25 02:37:28 by ldecavel          #+#    #+#             */
-/*   Updated: 2026/04/25 02:54:34 by ldecavel         ###   ########.fr       */
+/*   Updated: 2026/04/25 15:29:16 by ldecavel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /* extern */
 #include <ncurses.h>
+/* intern */
+#include "error.h"
+#include "render.h"
 
-/* display with ncurses */
+extern void handle_resize(void)
+{
+	endwin();
+	refresh();
+	clear();
+}
 
-/* Window resize. (with signals) */
+extern t_errcode ncurses_init(void)
+{
+	if (initscr() == NULL
+		|| cbreak() == ERR
+		|| noecho() == ERR
+		|| keypad(stdscr, TRUE) == ERR
+		|| nodelay(stdscr, FALSE) == ERR)
+		return NCURSES_ERROR;
 
-/* VIEWS with different game loops */
+	curs_set(0);
+	set_escdelay(25);
+	timeout(16);
+
+	if (has_colors() == TRUE) {
+		start_color();
+		use_default_colors();
+	}
+
+	refresh();
+	return (NO_ERROR);
+}

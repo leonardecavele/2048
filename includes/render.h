@@ -1,14 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   time.c                                             :+:      :+:    :+:   */
+/*   render.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/25 02:46:25 by ldecavel          #+#    #+#             */
-/*   Updated: 2026/04/25 02:46:36 by ldecavel         ###   ########.fr       */
+/*   Created: 2026/04/25 12:21:20 by ldecavel          #+#    #+#             */
+/*   Updated: 2026/04/25 12:28:46 by ldecavel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#ifndef RENDER_H
+#define RENDER_H
 
-/* delais, delta entre frames, ticks ... */
+#include "error.h"
+
+t_errcode ncurses_init(void);
+void handle_resize(void);
+
+#endif

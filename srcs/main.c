@@ -6,7 +6,7 @@
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/25 01:51:37 by ldecavel          #+#    #+#             */
-/*   Updated: 2026/04/25 16:15:25 by gabach           ###   ########.fr       */
+/*   Updated: 2026/04/25 13:32:00 by ldecavel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,59 +17,25 @@
 #include <unistd.h>
 /* intern */
 #include "error.h"
-#include "gameplay.h"
-#include "libft.h"
+#include "render.h"
+#include "signals.h"
+#include "game_loop.h"
 
 
-/* vu qu'on a un petit board on peut tout faire sur la stack */
-/* pas besoin de malloc imo */
-/* go mettre des defines pour la taille de la grid qu'on soit capable
-   de gerer plus gros facilement
-*/
-
-
-/* vu qu'on a les signaux on peut gerer les ctrl c etc pour quand meme
-   sortir proprement
-*/
-
-
-int	main(int ac, char **av)
+int	main(void)
 {
-	int	board[BOARD_SIZE][BOARD_SIZE];
-	char c[2];
-
-	(void)ac;
-	(void)av;
-	/* use OR to update it with functions
-	   errcode |= func();
-	*/
-	srand(time(NULL));
 	t_errcode errcode = NO_ERROR;
 
-	init_map(board);
-	print_board(board);
-	while (1)
-	{
-		ft_putchar_fd('\n', 1);
-		read(0, &c, 2);
-		if (c[0] == 'w')
-			move_up(board);
-		else if (c[0] == 's')
-			move_down(board);
-		else if (c[0] == 'a')
-			move_left(board);
-		else if (c[0] == 'd')
-			move_right(board);
-		add_one_nbr(board);
-		print_board(board);
+	errcode |= ncurses_init();
+	if (errcode != NO_ERROR)
+		return errcode_message(errcode);
+
+	errcode |= signals_init();
+	if (errcode == NO_ERROR) {
+		srand(time(NULL));
+		game_loop();
 	}
 
-	/* init ncurses */
-	/* init game */
-
-	/* call game_loop */
-
-	/* closes ncurses cleanly */
-
+	endwin();
 	return errcode_message(errcode);
 }

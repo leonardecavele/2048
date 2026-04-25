@@ -29,7 +29,37 @@ int		generate_number(void)
 		return  (2);
 }
 
-void	add_one_nbr(int board[BOARD_SIZE][BOARD_SIZE])
+int positif_int_tab_len(int *tab)
+{
+	int index;
+
+	index = 0;
+	while (tab[index] >= 0)
+		index++;
+	return (index);
+}
+
+void print_board(t_cell board[BOARD_SIZE][BOARD_SIZE])
+{
+	int row;
+	int col;
+
+	row = 0;
+	while (row < BOARD_SIZE)
+	{
+		col = 0;
+		while (col < BOARD_SIZE)
+		{
+			ft_putnbr_fd(board[row][col], 1);
+			ft_putchar_fd(' ', 1);
+			col++;
+		}
+		ft_putchar_fd('\n', 1);
+		row++;
+	}
+}
+
+void	add_one_nbr(t_cell board[BOARD_SIZE][BOARD_SIZE])
 {
 	int	available_box[BOARD_SIZE * BOARD_SIZE];
 	int	row;
@@ -58,7 +88,7 @@ void	add_one_nbr(int board[BOARD_SIZE][BOARD_SIZE])
 	board[row][col] = generate_number();
 }
 
-void	init_map(int board[BOARD_SIZE][BOARD_SIZE])
+void	init_board(t_cell board[BOARD_SIZE][BOARD_SIZE])
 {
 	int row;
 	int col;
