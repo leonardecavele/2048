@@ -6,7 +6,7 @@
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/25 02:57:57 by ldecavel          #+#    #+#             */
-/*   Updated: 2026/04/25 15:28:46 by ldecavel         ###   ########.fr       */
+/*   Updated: 2026/04/25 16:53:47 by ldecavel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,6 +145,20 @@ static void	render_board_grid(t_app *app)
 
 extern void game_render(t_app *app)
 {
+	getmaxyx(stdscr, app->screen.rows, app->screen.cols);
+
+	int r = app->screen.rows;
+	int c = app->screen.cols;
+
+	if (r < MIN_ROW || c < MIN_COL) {
+		render_too_small(app);
+		return;
+	}
+
+	if (screen_ratio_is_bad(app)) {
+		render_invalid_ratio(app);
+		return;
+	}
+
 	render_board_grid(app);
-	/* affichage du jeu */
 }

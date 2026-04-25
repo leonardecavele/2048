@@ -6,7 +6,7 @@
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/25 12:21:20 by ldecavel          #+#    #+#             */
-/*   Updated: 2026/04/25 16:28:12 by ldecavel         ###   ########.fr       */
+/*   Updated: 2026/04/25 16:52:38 by ldecavel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,15 @@
 
 #include "error.h"
 
-#define MIN_COL 21
+#define TERM_CHAR_RATIO			2
+
+#define MAX_WIDTH_RATIO_NUM		16
+#define MAX_WIDTH_RATIO_DEN		10
+
+#define MIN_WIDTH_RATIO_NUM		18
+#define MIN_WIDTH_RATIO_DEN		10
+
+#define MIN_COL 42
 #define MIN_ROW 21
 
 typedef struct s_app t_app;
