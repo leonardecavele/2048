@@ -6,7 +6,7 @@
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/25 02:51:31 by ldecavel          #+#    #+#             */
-/*   Updated: 2026/04/25 16:29:25 by gabach           ###   ########.fr       */
+/*   Updated: 2026/04/25 17:16:55 by gabach           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,5 +43,7 @@ void	move_down(t_cell board[BOARD_SIZE][BOARD_SIZE]);
 void	move_up(t_cell board[BOARD_SIZE][BOARD_SIZE]);
 void	move_left(t_cell board[BOARD_SIZE][BOARD_SIZE]);
 void	move_right(t_cell board[BOARD_SIZE][BOARD_SIZE]);
+int		are_you_winning_son(t_cell board[BOARD_SIZE][BOARD_SIZE]);
+int		is_loosed(t_cell board[BOARD_SIZE][BOARD_SIZE]);
 
 #endif

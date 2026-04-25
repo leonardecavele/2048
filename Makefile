@@ -26,7 +26,8 @@ SRCS = \
 	views/game.c \
 	gameplay/board.c \
 	gameplay/moves.c \
-	gameplay/utils.c 
+	gameplay/utils.c \
+	gameplay/end_functions.c \
 
 OBJS = $(SRCS:%.c=$(BUILD_DIR)/%.o)
 DEPS = $(OBJS:.o=.d)
