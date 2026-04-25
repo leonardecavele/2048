@@ -10,8 +10,8 @@ LIBFT_DIR = libft
 
 # flags
 CC = cc
-AR = ar rcs
 CFLAGS = -MMD -MP -Wall -Wextra -Werror -I $(INC_DIR) -I $(LIBFT_DIR)/includes
+LINK := -lncurses
 
 # files
 SRCS = \
@@ -25,7 +25,7 @@ DEPS = $(OBJS:.o=.d)
 all: $(NAME)
 
 $(NAME): $(OBJS) | libft
-	$(CC) $(CFLAGS) $(OBJS) $(LIBFT_A) -o $@
+	$(CC) $(CFLAGS) $(OBJS) $(LIBFT_A) $(LINK) -o $@
 
 $(BUILD_DIR)/%.o: $(SRCS_DIR)/%.c
 	@mkdir -p $(dir $@)
