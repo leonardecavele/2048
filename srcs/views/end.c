@@ -6,7 +6,7 @@
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/25 02:58:57 by ldecavel          #+#    #+#             */
-/*   Updated: 2026/04/25 22:01:46 by ldecavel         ###   ########.fr       */
+/*   Updated: 2026/04/25 22:12:56 by ldecavel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,10 +56,10 @@ static void	render_defeat_title(t_app *app, int y)
 {
 	attron(A_BOLD);
 	print_centered(app, y + 0, " ____  _____ _____ _____    _  _____");
-	print_centered(app, y + 1, "|  _ \\| ____|  ___| ____|  / \\|_   _|");
-	print_centered(app, y + 2, "| | | |  _| | |_  |  _|   / _ \\ | |  ");
-	print_centered(app, y + 3, "| |_| | |___|  _| | |___ / ___ \\| |  ");
-	print_centered(app, y + 4, "|____/|_____|_|   |_____/_/   \\_\\_|  ");
+	print_centered(app, y + 1, " |  _ \\| ____|  ___| ____|  / \\|_   _|");
+	print_centered(app, y + 2, " | | | |  _| | |_  |  _|   / _ \\ | |  ");
+	print_centered(app, y + 3, " | |_| | |___|  _| | |___ / ___ \\| |  ");
+	print_centered(app, y + 4, " |____/|_____|_|   |_____/_/   \\_\\_|  ");
 	attroff(A_BOLD);
 }
 
@@ -99,16 +99,17 @@ extern void end_render(t_app *app)
 	}
 
 	erase();
-	render_frame(app, (r / 2) - 5, 31, 14);
-
 	if (app->win == true) {
+		render_frame(app, (r / 2) - 5, 31, 14);
 		if (app->end_message_ver)
 			render_win(app, (r / 2) - 5);
 		else
 			render_gg(app, (r / 2) - 5);
 	}
-	else
+	else {
+		render_frame(app, (r / 2) - 5, 41, 14);
 		render_defeat_title(app, (r / 2) - 5);
+	}
 
 	render_score(app, (r / 2) + 1);
 	render_end_buttons(app, (r / 2) + 3);
