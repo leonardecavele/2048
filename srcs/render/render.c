@@ -6,7 +6,7 @@
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/25 02:37:28 by ldecavel          #+#    #+#             */
-/*   Updated: 2026/04/25 12:27:54 by ldecavel         ###   ########.fr       */
+/*   Updated: 2026/04/25 13:02:19 by ldecavel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ extern t_errcode ncurses_init(void)
 		|| cbreak() == ERR
 		|| noecho() == ERR
 		|| keypad(stdscr, TRUE) == ERR
-		|| nodelay(stdscr, TRUE) == ERR)
+		|| nodelay(stdscr, FALSE) == ERR)
 		return NCURSES_ERROR;
 
 	curs_set(0);

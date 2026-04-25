@@ -1,14 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   time.c                                             :+:      :+:    :+:   */
+/*   game_loop.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/25 02:46:25 by ldecavel          #+#    #+#             */
-/*   Updated: 2026/04/25 02:46:36 by ldecavel         ###   ########.fr       */
+/*   Created: 2026/04/25 13:09:14 by ldecavel          #+#    #+#             */
+/*   Updated: 2026/04/25 13:09:30 by ldecavel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#ifndef GAME_LOOP_H
+#define GAME_LOOP_H
 
-/* delais, delta entre frames, ticks ... */
+void game_loop(void);
+
+#endif
