@@ -6,12 +6,14 @@
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/25 01:51:37 by ldecavel          #+#    #+#             */
-/*   Updated: 2026/04/25 13:10:02 by ldecavel         ###   ########.fr       */
+/*   Updated: 2026/04/25 13:32:00 by ldecavel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /* extern */
 #include <ncurses.h>
+#include <time.h>
+#include <stdlib.h>
 /* intern */
 #include "error.h"
 #include "render.h"
@@ -28,10 +30,8 @@ int	main(void)
 		return errcode_message(errcode);
 
 	errcode |= signals_init();
-	if (errcode == NO_ERROR)
-	{
-		/* init game */
-		/* call game_loop */
+	if (errcode == NO_ERROR) {
+		srand(time(NULL));
 		game_loop();
 	}
 

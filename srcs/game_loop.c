@@ -6,7 +6,7 @@
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/25 02:38:23 by ldecavel          #+#    #+#             */
-/*   Updated: 2026/04/25 13:06:49 by ldecavel         ###   ########.fr       */
+/*   Updated: 2026/04/25 13:43:51 by ldecavel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,21 +15,28 @@
 #include "error.h"
 #include "signals.h"
 #include "render.h"
+#include "app.h"
 
 extern void game_loop(void) {
-	t_view	menu_view = {.update = menu_update, .render = menu_render};
-	t_view	game_view = {.update = game_update, .render = game_render};
+	t_app app = {
+		.menu_view = {
+			.update = menu_update,
+			.render = menu_render
+		},
+		.game_view = {
+			.update = game_update,
+			.render = game_render
+		}
+	};
+	init_board(app.board);
 
-
-	t_view	*current_view = &game_view;
-	(void)menu_view;
-
+	app.current_view = &app.game_view;
 	while (!must_exit())
 	{
 		if (must_resize())
 			handle_resize();
 
-		current_view->update();
-		current_view->render();
+		app.current_view->update(&app);
+		app.current_view->render(&app);
 	}
 }
