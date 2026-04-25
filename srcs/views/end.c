@@ -6,7 +6,7 @@
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/25 02:58:57 by ldecavel          #+#    #+#             */
-/*   Updated: 2026/04/25 22:25:07 by ldecavel         ###   ########.fr       */
+/*   Updated: 2026/04/25 22:31:13 by ldecavel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ extern void end_update(t_app *app)
 	if (app->user_input == 27)
 		app->exit = true;
 
-	if (app->user_input == 'c' || app->user_input == 'C')
+	if (!app->defeat
+		&& (app->user_input == 'c' || app->user_input == 'C'))
 		app->current_view = &app->game_view;
 }
 
@@ -87,8 +88,12 @@ static void	render_score(t_app *app, int y)
 static void	render_end_buttons(t_app *app, int y)
 {
 	attron(A_REVERSE | A_BOLD);
-	print_centered(app, y + 0, "  CONTINUE (C)  ");
-	print_centered(app, y + 2, "   EXIT (ESC)   ");
+	if (!app->defeat) {
+		print_centered(app, y + 0, "  CONTINUE (C)  ");
+		print_centered(app, y + 2, "   EXIT (ESC)   ");
+	}
+	else
+		print_centered(app, y + 0, "   EXIT (ESC)   ");
 	attroff(A_REVERSE | A_BOLD);
 }
 
@@ -118,7 +123,7 @@ extern void end_render(t_app *app)
 			render_gg(app, (r / 2) - 5);
 	}
 	else if (app->defeat == true) {
-		render_frame(app, (r / 2) - 5, 41, 14);
+		render_frame(app, (r / 2) - 5, 41, 12);
 		render_defeat_title(app, (r / 2) - 5);
 	}
 	else {
