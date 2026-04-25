@@ -6,7 +6,7 @@
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/25 02:38:23 by ldecavel          #+#    #+#             */
-/*   Updated: 2026/04/25 02:44:41 by ldecavel         ###   ########.fr       */
+/*   Updated: 2026/04/25 03:00:04 by ldecavel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,3 +22,15 @@
    on laisse le joueur jouer, et la on le reempeche et on fait nos trucs
    etc ...
 */
+
+void game_loop(void) {
+	t_view	menu_view = {.update = menu_update, .render = menu_render};
+	t_view	game_view = {.update = game_update, .render = game_render};
+
+	t_view	*current_view = &menu_view;
+	while (1)
+	{
+		current_view->update();
+		current_view->render();
+	}
+}
