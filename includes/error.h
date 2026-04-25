@@ -6,7 +6,7 @@
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/13 13:23:36 by ldecavel          #+#    #+#             */
-/*   Updated: 2026/04/25 12:37:43 by ldecavel         ###   ########.fr       */
+/*   Updated: 2026/04/25 12:46:41 by ldecavel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,11 @@ typedef int	t_errcode;
 /* used bitwise */
 typedef enum e_errcodes
 {
-	NO_ERROR = (1 << 0),
-	MALLOC_ERROR = (1 << 1),
-	ARG_COUNT_ERROR = (1 << 2),
-	INVALID_ARG_ERROR = (1 << 3),
-	NCURSES_ERROR = (1 << 4),
-	SIGNAL_ERROR = (1 << 5)
+	NO_ERROR = 0,
+	ARG_COUNT_ERROR = (1 << 0),
+	INVALID_ARG_ERROR = (1 << 1),
+	NCURSES_ERROR = (1 << 2),
+	SIGNAL_ERROR = (1 << 3)
 }	t_errcodes;
 
 t_errcode	errcode_message(t_errcode errcode);

@@ -6,7 +6,7 @@
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/16 13:01:36 by ldecavel          #+#    #+#             */
-/*   Updated: 2026/04/25 12:24:31 by ldecavel         ###   ########.fr       */
+/*   Updated: 2026/04/25 12:46:05 by ldecavel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,9 @@ extern t_errcode	errcode_message(t_errcode errcode)
 		return (errcode);
 	}
 
-	if (errcode & MALLOC_ERROR)
-		ft_dprintf(2, "cannot allocate memory, malloc failed\n");
 	if (errcode & NCURSES_ERROR)
 		ft_dprintf(2, "cannot init ncurses\n");
+	if (errcode & SIGNAL_ERROR)
+		ft_dprintf(2, "error with signals\n");
 	return (errcode);
 }
