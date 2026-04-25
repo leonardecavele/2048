@@ -6,7 +6,7 @@
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/25 02:51:31 by ldecavel          #+#    #+#             */
-/*   Updated: 2026/04/25 13:41:29 by ldecavel         ###   ########.fr       */
+/*   Updated: 2026/04/25 14:06:56 by ldecavel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ typedef uint32_t t_cell;
 # define MAX_BOARD_SIZE 16
 
 # ifndef BOARD_SIZE 
-#  define BOARD_SIZE 4
+#  define BOARD_SIZE 10
 # elif (BOARD_SIZE < MIN_BOARD_SIZE) || (BOARD_SIZE > MAX_BOARD_SIZE)
 #  undef BOARD_SIZE
 #  define BOARD_SIZE 4

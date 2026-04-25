@@ -6,7 +6,7 @@
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/25 02:37:28 by ldecavel          #+#    #+#             */
-/*   Updated: 2026/04/25 13:45:05 by ldecavel         ###   ########.fr       */
+/*   Updated: 2026/04/25 15:18:16 by ldecavel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ extern t_errcode ncurses_init(void)
 		return NCURSES_ERROR;
 
 	curs_set(0);
+
 	if (has_colors() == TRUE) {
 		start_color();
 		use_default_colors();
