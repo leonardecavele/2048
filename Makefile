@@ -20,6 +20,7 @@ SRCS = \
 	error.c \
 	signals.c \
 	game_loop.c \
+	helpers.c \
 	render/render.c \
 	views/menu.c \
 	views/game.c \
