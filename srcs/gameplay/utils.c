@@ -6,7 +6,7 @@
 /*   By: gabach <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/25 12:51:19 by gabach            #+#    #+#             */
-/*   Updated: 2026/04/25 12:51:49 by gabach           ###   ########.fr       */
+/*   Updated: 2026/04/25 16:28:18 by gabach           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int positif_int_tab_len(int *tab)
 	return (index);
 }
 
-void	print_board(int board[BOARD_SIZE][BOARD_SIZE])
+void	print_board(t_cell board[BOARD_SIZE][BOARD_SIZE])
 {
 	int row;
 	int col;

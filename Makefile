@@ -18,7 +18,7 @@ LINK := -lncurses
 SRCS = \
 	main.c \
 	error.c \
-	time.c \
+	signals.c \
 	game_loop.c \
 	render/render.c \
 	views/menu.c \

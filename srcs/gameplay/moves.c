@@ -6,14 +6,14 @@
 /*   By: gabach <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/25 12:54:20 by gabach            #+#    #+#             */
-/*   Updated: 2026/04/25 16:12:19 by gabach           ###   ########.fr       */
+/*   Updated: 2026/04/25 16:29:41 by gabach           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "gameplay.h"
 #include "libft.h"
 
-int	can_move(int coord1, int coord2, int combined[BOARD_SIZE], int board[BOARD_SIZE][BOARD_SIZE])
+t_cell	can_move(int coord1, int coord2, int combined[BOARD_SIZE], t_cell board[BOARD_SIZE][BOARD_SIZE])
 {
 	int	index;
 	int	nbr1;
@@ -36,7 +36,7 @@ int	can_move(int coord1, int coord2, int combined[BOARD_SIZE], int board[BOARD_S
 	return (2);
 }
 
-void	move_left(int board[BOARD_SIZE][BOARD_SIZE])
+void	move_left(t_cell board[BOARD_SIZE][BOARD_SIZE])
 {
 	int row;
 	int col;
@@ -83,7 +83,7 @@ void	move_left(int board[BOARD_SIZE][BOARD_SIZE])
 	}
 }
 
-void	move_right(int board[BOARD_SIZE][BOARD_SIZE])
+void	move_right(t_cell board[BOARD_SIZE][BOARD_SIZE])
 {
 	int row, col, move, is_moving;
 	int combined[BOARD_SIZE];
@@ -118,7 +118,7 @@ void	move_right(int board[BOARD_SIZE][BOARD_SIZE])
 	}
 }
 
-void	move_up(int board[BOARD_SIZE][BOARD_SIZE])
+void	move_up(t_cell board[BOARD_SIZE][BOARD_SIZE])
 {
 	int row, col, move, is_moving;
 	int combined[BOARD_SIZE];
@@ -153,7 +153,7 @@ void	move_up(int board[BOARD_SIZE][BOARD_SIZE])
 	}
 }
 
-void	move_down(int board[BOARD_SIZE][BOARD_SIZE])
+void	move_down(t_cell board[BOARD_SIZE][BOARD_SIZE])
 {
 	int row, col, move, is_moving;
 	int combined[BOARD_SIZE];
