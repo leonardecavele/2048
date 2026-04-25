@@ -6,7 +6,7 @@
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/25 02:57:57 by ldecavel          #+#    #+#             */
-/*   Updated: 2026/04/25 15:07:22 by ldecavel         ###   ########.fr       */
+/*   Updated: 2026/04/25 15:28:46 by ldecavel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,21 +20,21 @@
 
 extern void game_update(t_app *app)
 {
-	int c = getch();
+	app->user_input = getch();
 
-	if (c == -1 || c == ERR)
+	if (app->user_input == ERR)
 		return ;
 
-	if (c == KEY_UP) {
+	if (app->user_input == KEY_UP) {
 		add_one_nbr(app->board);
 	}
-	else if (c == KEY_DOWN) {
+	else if (app->user_input == KEY_DOWN) {
 		add_one_nbr(app->board);
 	}
-	else if (c == KEY_LEFT) {
+	else if (app->user_input == KEY_LEFT) {
 		add_one_nbr(app->board);
 	}
-	else if (c == KEY_RIGHT) {
+	else if (app->user_input == KEY_RIGHT) {
 		add_one_nbr(app->board);
 	}
 }

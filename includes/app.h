@@ -10,6 +10,7 @@ typedef struct s_app
 	t_view	menu_view;
 	t_view	game_view;
 	t_view	*current_view;
+	int		user_input;
 }	t_app;
 
 #endif
