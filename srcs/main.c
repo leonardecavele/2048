@@ -6,14 +6,18 @@
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/25 01:51:37 by ldecavel          #+#    #+#             */
-/*   Updated: 2026/04/25 02:50:45 by ldecavel         ###   ########.fr       */
+/*   Updated: 2026/04/25 12:38:38 by gabach           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /* extern */
 #include <ncurses.h>
+#include <time.h>
+#include <stdlib.h>
 /* intern */
 #include "error.h"
+#include "gameplay.h"
+#include "libft.h"
 
 
 /* vu qu'on a un petit board on peut tout faire sur la stack */
@@ -30,12 +34,21 @@
 
 int	main(int ac, char **av)
 {
+	int	board[BOARD_SIZE][BOARD_SIZE];
+
 	(void)ac;
 	(void)av;
 	/* use OR to update it with functions
 	   errcode |= func();
 	*/
+	srand(time(NULL));
 	t_errcode errcode = NO_ERROR;
+
+	init_map(board);
+	print_board(board);
+	ft_putchar_fd('\n', 1);
+	add_one_nbr(board);
+	print_board(board);
 
 	/* init ncurses */
 	/* init game */
