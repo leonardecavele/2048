@@ -6,7 +6,7 @@
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/25 02:58:57 by ldecavel          #+#    #+#             */
-/*   Updated: 2026/04/25 21:17:58 by ldecavel         ###   ########.fr       */
+/*   Updated: 2026/04/25 21:55:40 by ldecavel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,29 +30,6 @@ extern void menu_update(t_app *app)
 
 	if (app->user_input == 27)
 		app->exit = true;
-}
-
-static void	render_title_frame(t_app *app, int y)
-{
-	int	box_w = 31;
-	int	box_h = 14;
-	int start_y = y - 1;
-	int start_x = (app->screen.cols - box_w) / 2;
-
-	attron(A_BOLD);
-	mvaddch(start_y, start_x, ACS_ULCORNER);
-	mvhline(start_y, start_x + 1, ACS_HLINE, box_w - 2);
-	mvaddch(start_y, start_x + box_w - 1, ACS_URCORNER);
-
-	for (int i = 1; i < box_h - 1; i++) {
-		mvaddch(start_y + i, start_x, ACS_VLINE);
-		mvaddch(start_y + i, start_x + box_w - 1, ACS_VLINE);
-	}
-
-	mvaddch(start_y + box_h - 1, start_x, ACS_LLCORNER);
-	mvhline(start_y + box_h - 1, start_x + 1, ACS_HLINE, box_w - 2);
-	mvaddch(start_y + box_h - 1, start_x + box_w - 1, ACS_LRCORNER);
-	attroff(A_BOLD);
 }
 
 static void render_title(t_app *app, int y)
@@ -94,7 +71,7 @@ extern void menu_render(t_app *app)
 	}
 
 	erase();
-	render_title_frame(app, (r / 2) - 5);
+	render_frame(app, (r / 2) - 5, 31, 14);
 	render_title(app, (r / 2) - 5);
 	render_play_button(app, (r / 2) - 5);
 	refresh();

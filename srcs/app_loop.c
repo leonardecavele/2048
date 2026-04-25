@@ -6,11 +6,13 @@
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/25 02:38:23 by ldecavel          #+#    #+#             */
-/*   Updated: 2026/04/25 21:06:00 by ldecavel         ###   ########.fr       */
+/*   Updated: 2026/04/25 21:48:25 by ldecavel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/* intern imports */
+/* extern */
+#include <stdlib.h>
+/* intern */
 #include "view.h"
 #include "error.h"
 #include "signals.h"
@@ -31,7 +33,8 @@ extern void app_loop(void) {
 			.update = end_update,
 			.render = end_render
 		},
-		.user_input = -1
+		.user_input = -1,
+		.end_message_ver = rand() % 2 == 0
 	};
 	init_board(app.board);
 

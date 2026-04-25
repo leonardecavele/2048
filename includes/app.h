@@ -12,9 +12,12 @@ typedef struct s_app
 	t_view		game_view;
 	t_view		end_view;
 	t_view		*current_view;
-	int			user_input;
 	t_screen	screen;
+	int64_t		score;
+	int			user_input;
 	bool		exit;
+	bool		win;
+	bool		end_message_ver;
 }	t_app;
 
 #endif

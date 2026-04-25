@@ -6,7 +6,7 @@
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/25 02:57:57 by ldecavel          #+#    #+#             */
-/*   Updated: 2026/04/25 21:07:46 by ldecavel         ###   ########.fr       */
+/*   Updated: 2026/04/25 21:29:44 by ldecavel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -186,6 +186,7 @@ extern void game_render(t_app *app)
 		return;
 	}
 
+	app->win = true;
 	erase();
 	render_board(app);
 	refresh();
