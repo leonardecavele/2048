@@ -6,7 +6,7 @@
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/25 02:58:57 by ldecavel          #+#    #+#             */
-/*   Updated: 2026/04/25 22:16:34 by ldecavel         ###   ########.fr       */
+/*   Updated: 2026/04/25 22:35:18 by ldecavel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,23 +55,12 @@ static void	render_play_button(t_app *app, int y)
 
 extern void menu_render(t_app *app)
 {
-	getmaxyx(stdscr, app->screen.rows, app->screen.cols);
+	check_size(app);
 
 	int r = app->screen.rows;
-	int c = app->screen.cols;
-
-	if (r < MIN_ROW || c < MIN_COL) {
-		render_too_small(app);
-		return;
-	}
-
-	if (screen_ratio_is_bad(app)) {
-		render_invalid_ratio(app);
-		return;
-	}
 
 	erase();
-	render_frame(app, (r / 2) - 5, 31, 14);
+	render_frame(app, (r / 2) - 5, 29, 14);
 	render_title(app, (r / 2) - 5);
 	render_play_button(app, (r / 2) - 5);
 	refresh();

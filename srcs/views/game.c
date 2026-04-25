@@ -6,7 +6,7 @@
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/25 02:57:57 by ldecavel          #+#    #+#             */
-/*   Updated: 2026/04/25 22:29:43 by ldecavel         ###   ########.fr       */
+/*   Updated: 2026/04/25 22:33:34 by ldecavel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -178,20 +178,7 @@ static void	render_board(t_app *app)
 
 extern void game_render(t_app *app)
 {
-	getmaxyx(stdscr, app->screen.rows, app->screen.cols);
-
-	int r = app->screen.rows;
-	int c = app->screen.cols;
-
-	if (r < MIN_ROW || c < MIN_COL) {
-		render_too_small(app);
-		return;
-	}
-
-	if (screen_ratio_is_bad(app)) {
-		render_invalid_ratio(app);
-		return;
-	}
+	check_size(app);
 
 	erase();
 	render_board(app);

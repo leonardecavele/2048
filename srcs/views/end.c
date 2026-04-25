@@ -6,7 +6,7 @@
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/25 02:58:57 by ldecavel          #+#    #+#             */
-/*   Updated: 2026/04/25 22:31:13 by ldecavel         ###   ########.fr       */
+/*   Updated: 2026/04/25 22:34:55 by ldecavel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,22 +99,12 @@ static void	render_end_buttons(t_app *app, int y)
 
 extern void end_render(t_app *app)
 {
-	getmaxyx(stdscr, app->screen.rows, app->screen.cols);
+	check_size(app);
 
 	int r = app->screen.rows;
-	int c = app->screen.cols;
-
-	if (r < MIN_ROW || c < MIN_COL) {
-		render_too_small(app);
-		return;
-	}
-
-	if (screen_ratio_is_bad(app)) {
-		render_invalid_ratio(app);
-		return;
-	}
 
 	erase();
+
 	if (app->win == true) {
 		render_frame(app, (r / 2) - 5, 31, 14);
 		if (app->end_message_ver)
