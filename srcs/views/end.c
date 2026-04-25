@@ -6,7 +6,7 @@
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/25 02:58:57 by ldecavel          #+#    #+#             */
-/*   Updated: 2026/04/25 22:12:56 by ldecavel         ###   ########.fr       */
+/*   Updated: 2026/04/25 22:25:07 by ldecavel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,17 @@ static void	render_defeat_title(t_app *app, int y)
 	attroff(A_BOLD);
 }
 
+static void	render_pause_title(t_app *app, int y)
+{
+	attron(A_BOLD);
+	print_centered(app, y + 0, "   ____   _   _   _ ____  _____ ");
+	print_centered(app, y + 1, "  |  _ \\ / \\ | | | / ___|| ____|");
+	print_centered(app, y + 2, "  | |_) / _ \\| | | \\___ \\|  _|  ");
+	print_centered(app, y + 3, "  |  __/ ___ \\ |_| |___) | |___ ");
+	print_centered(app, y + 4, "  |_| /_/   \\_\\___/|____/|_____|");
+	attroff(A_BOLD);
+}
+
 static void	render_score(t_app *app, int y)
 {
 	char	buffer[64];
@@ -106,9 +117,13 @@ extern void end_render(t_app *app)
 		else
 			render_gg(app, (r / 2) - 5);
 	}
-	else {
+	else if (app->defeat == true) {
 		render_frame(app, (r / 2) - 5, 41, 14);
 		render_defeat_title(app, (r / 2) - 5);
+	}
+	else {
+		render_pause_title(app, (r / 2) - 5);
+		render_frame(app, (r / 2) - 5, 34, 14);
 	}
 
 	render_score(app, (r / 2) + 1);

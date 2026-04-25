@@ -16,8 +16,9 @@ typedef struct s_app
 	int64_t		score;
 	int			user_input;
 	bool		exit;
-	bool		win;
 	bool		end_message_ver;
+	bool		win;
+	bool		defeat;
 }	t_app;
 
 #endif
