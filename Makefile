@@ -16,7 +16,12 @@ LINK := -lncurses
 # files
 SRCS = \
 	main.c \
-	error.c
+	error.c \
+	render/render.c \
+	gameplay.c \
+	time.c \
+	render.c \
+	game_loop.c
 
 OBJS = $(SRCS:%.c=$(BUILD_DIR)/%.o)
 DEPS = $(OBJS:.o=.d)

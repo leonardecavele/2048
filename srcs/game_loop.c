@@ -1,35 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   game_loop.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/04/25 01:51:37 by ldecavel          #+#    #+#             */
-/*   Updated: 2026/04/25 02:46:06 by ldecavel         ###   ########.fr       */
+/*   Created: 2026/04/25 02:38:23 by ldecavel          #+#    #+#             */
+/*   Updated: 2026/04/25 02:44:41 by ldecavel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/* extern */
-#include <ncurses.h>
-/* intern */
-#include "error.h"
 
-int	main(int ac, char **av)
-{
-	(void)ac;
-	(void)av;
-	/* use OR to update it with functions
-	   errcode |= func();
-	*/
-	t_errcode errcode = NO_ERROR;
 
-	/* init ncurses */
-	/* init game */
+/* pour la boucle principale stabilisee a 60 fps */
+/* bien essayer de separer temps / gameplay / display */
 
-	/* call game_loop */
+/* boucle principale */
+/* calls input, gameplay, time, display */
 
-	/* closes ncurses cleanly */
-
-	return errcode_message(errcode);
-}
+/* en gros on anime ce qu'on doit animer et des que c'est fait
+   on laisse le joueur jouer, et la on le reempeche et on fait nos trucs
+   etc ...
+*/
