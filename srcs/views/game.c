@@ -6,7 +6,7 @@
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/25 02:57:57 by ldecavel          #+#    #+#             */
-/*   Updated: 2026/04/25 16:59:56 by ldecavel         ###   ########.fr       */
+/*   Updated: 2026/04/25 17:29:36 by gabach           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,9 @@ extern void game_update(t_app *app)
 
 	if (app->user_input == ERR)
 		return ;
+
+	if (are_you_winning_son(app->board) || is_loosed(app->board))
+		app->current_view = &app->end_view;
 
 	if (app->user_input == KEY_UP) {
 		move_up(app->board);

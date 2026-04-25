@@ -6,7 +6,7 @@
 /*   By: gabach <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/25 16:46:05 by gabach            #+#    #+#             */
-/*   Updated: 2026/04/25 17:16:57 by gabach           ###   ########.fr       */
+/*   Updated: 2026/04/25 17:29:20 by gabach           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	are_you_winning_son(t_cell board[BOARD_SIZE][BOARD_SIZE])
 {
 	int	row;
 	int col;
-	int win_value;
+	t_cell win_value;
 
 	if (is_win_value_valid())
 		win_value = WIN_VALUE;
@@ -64,9 +64,9 @@ int	are_you_winning_son(t_cell board[BOARD_SIZE][BOARD_SIZE])
 
 int	is_loosed(t_cell board[BOARD_SIZE][BOARD_SIZE])
 {
-	int row;
-	int col;
-	int	nbr;
+	int 	row;
+	int 	col;
+	t_cell	nbr;
 
 	row = 0;
 	while (row < BOARD_SIZE)
