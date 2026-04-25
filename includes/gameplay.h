@@ -6,7 +6,7 @@
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/25 02:51:31 by ldecavel          #+#    #+#             */
-/*   Updated: 2026/04/25 14:06:56 by ldecavel         ###   ########.fr       */
+/*   Updated: 2026/04/25 16:29:25 by gabach           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,14 @@ typedef uint32_t t_cell;
 #  define BOARD_SIZE 4
 # endif
 
+
 void	init_board(t_cell board[BOARD_SIZE][BOARD_SIZE]);
 void	add_one_nbr(t_cell board[BOARD_SIZE][BOARD_SIZE]);
-void	print_board(t_cell board[BOARD_SIZE][BOARD_SIZE]);
+void	prt_cell_board(int board[BOARD_SIZE][BOARD_SIZE]);
+int 	positif_int_tab_len(int *tab);
+void	move_down(t_cell board[BOARD_SIZE][BOARD_SIZE]);
+void	move_up(t_cell board[BOARD_SIZE][BOARD_SIZE]);
+void	move_left(t_cell board[BOARD_SIZE][BOARD_SIZE]);
+void	move_right(t_cell board[BOARD_SIZE][BOARD_SIZE]);
 
 #endif

@@ -14,6 +14,7 @@
 #include <ncurses.h>
 #include <time.h>
 #include <stdlib.h>
+#include <unistd.h>
 /* intern */
 #include "error.h"
 #include "render.h"

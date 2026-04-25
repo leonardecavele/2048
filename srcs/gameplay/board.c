@@ -1,25 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   gameplay.c                                         :+:      :+:    :+:   */
+/*   board.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/25 02:44:53 by ldecavel          #+#    #+#             */
-/*   Updated: 2026/04/25 14:25:57 by ldecavel         ###   ########.fr       */
+/*   Updated: 2026/04/25 16:29:09 by gabach           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 
 #include "gameplay.h"
-#include "libft.h"
 
 /* game rule, collisions, moves, states ... */
 /* go faire pleins de structures pour les differents objets */
 /* un peu oriente objet */
 
-int		generate_number(void)
+t_cell		generate_number(void)
 {
 	int	rand_value;
 
@@ -28,36 +27,6 @@ int		generate_number(void)
 		return (4);
 	else
 		return  (2);
-}
-
-int positif_int_tab_len(int *tab)
-{
-	int index;
-
-	index = 0;
-	while (tab[index] >= 0)
-		index++;
-	return (index);
-}
-
-void print_board(t_cell board[BOARD_SIZE][BOARD_SIZE])
-{
-	int row;
-	int col;
-
-	row = 0;
-	while (row < BOARD_SIZE)
-	{
-		col = 0;
-		while (col < BOARD_SIZE)
-		{
-			ft_putnbr_fd(board[row][col], 1);
-			ft_putchar_fd(' ', 1);
-			col++;
-		}
-		ft_putchar_fd('\n', 1);
-		row++;
-	}
 }
 
 void	add_one_nbr(t_cell board[BOARD_SIZE][BOARD_SIZE])
@@ -69,7 +38,7 @@ void	add_one_nbr(t_cell board[BOARD_SIZE][BOARD_SIZE])
 
 	index = 0;
 	row = 0;
-	while (++row < BOARD_SIZE)
+	while (row < BOARD_SIZE)
 	{
 		col = 0;
 		while (col < BOARD_SIZE)
@@ -81,9 +50,11 @@ void	add_one_nbr(t_cell board[BOARD_SIZE][BOARD_SIZE])
 		row++;
 	}
 	available_box[index] = -1;
+	if (positif_int_tab_len(available_box) == 0)
+		return ;
 	index = rand() % positif_int_tab_len(available_box);
 	col = available_box[index] % BOARD_SIZE;
-	row = (available_box[index] - col) / BOARD_SIZE;
+	row = available_box[index] / BOARD_SIZE;
 	board[row][col] = generate_number();
 }
 
