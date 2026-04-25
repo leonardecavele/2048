@@ -6,7 +6,7 @@
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/25 02:58:57 by ldecavel          #+#    #+#             */
-/*   Updated: 2026/04/25 17:35:41 by ldecavel         ###   ########.fr       */
+/*   Updated: 2026/04/25 21:04:25 by ldecavel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,11 @@ extern void menu_update(t_app *app)
 
 	if (app->user_input == '\n'
 		|| app->user_input == '\r'
-		|| app->user_input == KEY_ENTER)
+		|| app->user_input == 'p' || app->user_input == 'P')
 		app->current_view = &app->game_view;
+
+	if (app->user_input == 27)
+		app->exit = true;
 }
 
 static void render_title(t_app *app, int y)
@@ -41,11 +44,12 @@ static void render_title(t_app *app, int y)
 
 static void	render_play_button(t_app *app, int y)
 {
-	print_centered(app, y - 1, "              ");
+	print_centered(app, y + 7, "                       ");
 	attron(A_REVERSE | A_BOLD);
-	print_centered(app, y + 0, "     PLAY     ");
+	print_centered(app, y + 8, "   PLAY (P)   ");
+	print_centered(app, y + 10, "  SCORES (S)  ");
 	attroff(A_REVERSE | A_BOLD);
-	print_centered(app, y + 1, "              ");
+	print_centered(app, y + 11, "                       ");
 }
 
 
@@ -67,7 +71,7 @@ extern void menu_render(t_app *app)
 	}
 
 	erase();
-	render_title(app, r / 5);
-	render_play_button(app, (r / 5) * 3.5);
+	render_title(app, (r / 2) - 5);
+	render_play_button(app, (r / 2) - 5);
 	refresh();
 }

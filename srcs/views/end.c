@@ -6,7 +6,7 @@
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/25 02:58:57 by ldecavel          #+#    #+#             */
-/*   Updated: 2026/04/25 17:35:48 by ldecavel         ###   ########.fr       */
+/*   Updated: 2026/04/25 21:08:43 by ldecavel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,9 @@ extern void end_update(t_app *app)
 
 	if (app->user_input == '\n'
 		|| app->user_input == '\r'
-		|| app->user_input == KEY_ENTER)
-		app->user_input = 27;
+		|| app->user_input == KEY_ENTER
+		|| app->user_input == 27)
+		app->exit = true;
 }
 
 extern void end_render(t_app *app)

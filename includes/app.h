@@ -14,6 +14,7 @@ typedef struct s_app
 	t_view		*current_view;
 	int			user_input;
 	t_screen	screen;
+	bool		exit;
 }	t_app;
 
 #endif
