@@ -1,6 +1,7 @@
 # structure
 NAME = 2048
 LIBFT_A = $(LIBFT_DIR)/libft.a
+SIZE ?= 4
 
 # directories 
 SRCS_DIR = srcs
@@ -10,19 +11,21 @@ LIBFT_DIR = libft
 
 # flags
 CC = cc
-CFLAGS = -MMD -MP -Wall -Wextra -Werror -I $(INC_DIR) -I $(LIBFT_DIR)/includes
+CFLAGS = -MMD -MP -Wall -Wextra -Werror -I $(INC_DIR) -I $(LIBFT_DIR)/includes -D BOARD_SIZE=$(SIZE)
 LINK := -lncurses
 
 # files
 SRCS = \
 	main.c \
+	error.c \
+	time.c \
+	game_loop.c \
 	render/render.c \
 	views/menu.c \
 	views/game.c \
-	error.c \
-	gameplay.c \
-	time.c \
-	game_loop.c \
+	gameplay/board.c \
+	gameplay/moves.c \
+	gameplay/utils.c 
 
 OBJS = $(SRCS:%.c=$(BUILD_DIR)/%.o)
 DEPS = $(OBJS:.o=.d)

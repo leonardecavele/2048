@@ -6,7 +6,7 @@
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/25 01:51:37 by ldecavel          #+#    #+#             */
-/*   Updated: 2026/04/25 12:38:38 by gabach           ###   ########.fr       */
+/*   Updated: 2026/04/25 16:15:25 by gabach           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include <ncurses.h>
 #include <time.h>
 #include <stdlib.h>
+#include <unistd.h>
 /* intern */
 #include "error.h"
 #include "gameplay.h"
@@ -35,6 +36,7 @@
 int	main(int ac, char **av)
 {
 	int	board[BOARD_SIZE][BOARD_SIZE];
+	char c[2];
 
 	(void)ac;
 	(void)av;
@@ -46,9 +48,21 @@ int	main(int ac, char **av)
 
 	init_map(board);
 	print_board(board);
-	ft_putchar_fd('\n', 1);
-	add_one_nbr(board);
-	print_board(board);
+	while (1)
+	{
+		ft_putchar_fd('\n', 1);
+		read(0, &c, 2);
+		if (c[0] == 'w')
+			move_up(board);
+		else if (c[0] == 's')
+			move_down(board);
+		else if (c[0] == 'a')
+			move_left(board);
+		else if (c[0] == 'd')
+			move_right(board);
+		add_one_nbr(board);
+		print_board(board);
+	}
 
 	/* init ncurses */
 	/* init game */

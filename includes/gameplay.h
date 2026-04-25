@@ -6,7 +6,7 @@
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/25 02:51:31 by ldecavel          #+#    #+#             */
-/*   Updated: 2026/04/25 12:36:17 by gabach           ###   ########.fr       */
+/*   Updated: 2026/04/25 16:14:11 by gabach           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,5 +34,10 @@ typedef enum e_const
 void	init_map(int board[BOARD_SIZE][BOARD_SIZE]);
 void	add_one_nbr(int board[BOARD_SIZE][BOARD_SIZE]);
 void	print_board(int board[BOARD_SIZE][BOARD_SIZE]);
+int 	positif_int_tab_len(int *tab);
+void	move_down(int board[BOARD_SIZE][BOARD_SIZE]);
+void	move_up(int board[BOARD_SIZE][BOARD_SIZE]);
+void	move_left(int board[BOARD_SIZE][BOARD_SIZE]);
+void	move_right(int board[BOARD_SIZE][BOARD_SIZE]);
 
 #endif
