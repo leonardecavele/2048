@@ -6,7 +6,7 @@
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/16 13:01:36 by ldecavel          #+#    #+#             */
-/*   Updated: 2026/04/25 02:26:40 by ldecavel         ###   ########.fr       */
+/*   Updated: 2026/04/25 12:24:31 by ldecavel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,15 @@ static void	usage(void)
 /* prints context about the errorcode */
 extern t_errcode	errcode_message(t_errcode errcode)
 {
+	if (errcode & ARG_COUNT_ERROR
+		|| errcode & INVALID_ARG_ERROR) {
+		usage();
+		return (errcode);
+	}
+
 	if (errcode & MALLOC_ERROR)
 		ft_dprintf(2, "cannot allocate memory, malloc failed\n");
-	if (
-		errcode & ARG_COUNT_ERROR
-		|| errcode & INVALID_ARG_ERROR
-		)
-		usage();
+	if (errcode & NCURSES_ERROR)
+		ft_dprintf(2, "cannot init ncurses\n");
 	return (errcode);
 }

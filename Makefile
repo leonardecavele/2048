@@ -19,6 +19,7 @@ SRCS = \
 	render/render.c \
 	views/menu.c \
 	views/game.c \
+	signals.c \
 	error.c \
 	gameplay.c \
 	time.c \

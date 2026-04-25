@@ -1,33 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.h                                            :+:      :+:    :+:   */
+/*   signals.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/03/13 13:23:36 by ldecavel          #+#    #+#             */
-/*   Updated: 2026/04/25 12:37:43 by ldecavel         ###   ########.fr       */
+/*   Created: 2026/04/25 11:58:01 by ldecavel          #+#    #+#             */
+/*   Updated: 2026/04/25 12:36:56 by ldecavel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ERROR_H
-# define ERROR_H
+#ifndef SIGNALS_H
+#define SIGNALS_H
 
-/* use this when returning error codes */
-typedef int	t_errcode;
+#include <signal.h>
+#include <stdbool.h>
 
-/* add error codes here */
-/* used bitwise */
-typedef enum e_errcodes
-{
-	NO_ERROR = (1 << 0),
-	MALLOC_ERROR = (1 << 1),
-	ARG_COUNT_ERROR = (1 << 2),
-	INVALID_ARG_ERROR = (1 << 3),
-	NCURSES_ERROR = (1 << 4),
-	SIGNAL_ERROR = (1 << 5)
-}	t_errcodes;
+typedef enum e_signals {
+	SIGNAL_RESIZE = (1 << 0),
+	SIGNAL_EXIT = (1 << 1)
+}	t_signals;
 
-t_errcode	errcode_message(t_errcode errcode);
+t_errcode signals_init(void);
+bool must_exit(void);
+bool must_resize(void);
 
 #endif

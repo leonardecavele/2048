@@ -6,7 +6,7 @@
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/25 01:51:37 by ldecavel          #+#    #+#             */
-/*   Updated: 2026/04/25 02:50:45 by ldecavel         ###   ########.fr       */
+/*   Updated: 2026/04/25 12:43:25 by ldecavel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,11 @@
 #include <ncurses.h>
 /* intern */
 #include "error.h"
+#include "render.h"
+#include "signals.h"
 
+
+#include <unistd.h>
 
 /* vu qu'on a un petit board on peut tout faire sur la stack */
 /* pas besoin de malloc imo */
@@ -28,21 +32,23 @@
 */
 
 
-int	main(int ac, char **av)
+int	main(void)
 {
-	(void)ac;
-	(void)av;
-	/* use OR to update it with functions
-	   errcode |= func();
-	*/
 	t_errcode errcode = NO_ERROR;
 
-	/* init ncurses */
+	errcode |= ncurses_init();
+	errcode |= signals_init();
+	if (errcode != NO_ERROR)
+		return (errcode_message(errcode));
+
 	/* init game */
+
+	sleep(5);
 
 	/* call game_loop */
 
 	/* closes ncurses cleanly */
 
+	endwin();
 	return errcode_message(errcode);
 }
