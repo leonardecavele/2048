@@ -6,7 +6,7 @@
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/25 02:58:57 by ldecavel          #+#    #+#             */
-/*   Updated: 2026/04/25 16:58:32 by ldecavel         ###   ########.fr       */
+/*   Updated: 2026/04/25 17:35:41 by ldecavel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,8 @@ extern void menu_render(t_app *app)
 		return;
 	}
 
+	erase();
 	render_title(app, r / 5);
 	render_play_button(app, (r / 5) * 3.5);
+	refresh();
 }
