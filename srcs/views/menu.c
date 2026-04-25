@@ -6,7 +6,7 @@
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/25 02:58:57 by ldecavel          #+#    #+#             */
-/*   Updated: 2026/04/25 22:12:00 by ldecavel         ###   ########.fr       */
+/*   Updated: 2026/04/25 22:16:34 by ldecavel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static void render_title(t_app *app, int y)
 {
 	print_centered(app, y + 0,  "  ___   ___  _  _  ___  ");
 	print_centered(app, y + 1,  " |__ \\ / _ \\| || ||__ \\ ");
-	print_centered(app, y + 2,  "    ) | | | | || |_  ) |");
+	print_centered(app, y + 2,  "    | | | | | || |_  | |");
 	print_centered(app, y + 3,  "   / /| | | |__   _|/ / ");
 	print_centered(app, y + 4,  "  / /_| |_| |  | | / /_ ");
 	print_centered(app, y + 5,  " |____|\\___/   |_||____|");
