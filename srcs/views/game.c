@@ -6,7 +6,7 @@
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/25 02:57:57 by ldecavel          #+#    #+#             */
-/*   Updated: 2026/04/26 16:36:21 by ldecavel         ###   ########.fr       */
+/*   Updated: 2026/04/26 16:40:33 by ldecavel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -180,7 +180,8 @@ static void	render_board(t_app *app)
 
 extern t_errcode game_render(t_app *app)
 {
-	check_size(app);
+	if (!check_size(app))
+		return NO_ERROR;
 
 	erase();
 	render_board(app);

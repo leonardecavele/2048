@@ -6,7 +6,7 @@
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/25 02:37:28 by ldecavel          #+#    #+#             */
-/*   Updated: 2026/04/26 12:00:06 by ldecavel         ###   ########.fr       */
+/*   Updated: 2026/04/26 16:39:03 by ldecavel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ extern bool	screen_ratio_is_bad(t_app *app)
 	return (false);
 }
 
-extern void check_size(t_app *app)
+extern bool check_size(t_app *app)
 {
 	getmaxyx(stdscr, app->screen.rows, app->screen.cols);
 
@@ -120,11 +120,13 @@ extern void check_size(t_app *app)
 
 	if (r < MIN_ROW || c < MIN_COL) {
 		render_too_small(app);
-		return;
+		return false;
 	}
 
 	if (screen_ratio_is_bad(app)) {
 		render_invalid_ratio(app);
-		return;
+		return false;
 	}
+
+	return true;
 }

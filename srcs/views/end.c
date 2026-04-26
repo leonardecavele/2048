@@ -6,7 +6,7 @@
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/25 02:58:57 by ldecavel          #+#    #+#             */
-/*   Updated: 2026/04/26 15:58:09 by ldecavel         ###   ########.fr       */
+/*   Updated: 2026/04/26 16:40:25 by ldecavel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -205,7 +205,8 @@ static void	render_defeat_buttons(t_app *app, int y)
 
 extern t_errcode end_render(t_app *app)
 {
-	check_size(app);
+	if (!check_size(app))
+		return NO_ERROR;
 
 	int	r = app->screen.rows;
 
