@@ -6,7 +6,7 @@
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/25 02:38:23 by ldecavel          #+#    #+#             */
-/*   Updated: 2026/04/26 11:49:52 by ldecavel         ###   ########.fr       */
+/*   Updated: 2026/04/26 12:25:51 by ldecavel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,13 +41,16 @@ extern t_errcode app_loop(void) {
 	init_board(app.board);
 
 	app.current_view = &app.menu_view;
-	while (!must_exit() && !app.exit)
-	{
+	while (!must_exit() && !app.exit) {
 		if (must_resize())
 			handle_resize();
 
 		errcode |= app.current_view->update(&app);
+		if (errcode != NO_ERROR)
+			return errcode;
 		errcode |= app.current_view->render(&app);
+		if (errcode != NO_ERROR)
+			return errcode;
 	}
 	return errcode;
 }

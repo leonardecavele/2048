@@ -6,7 +6,7 @@
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/25 02:58:57 by ldecavel          #+#    #+#             */
-/*   Updated: 2026/04/26 12:04:29 by ldecavel         ###   ########.fr       */
+/*   Updated: 2026/04/26 12:28:07 by ldecavel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,6 +148,17 @@ static void	render_pause_title(t_app *app, int y)
 	attroff(A_BOLD);
 }
 
+static void	typing_score_name(char dst[11], const char *src)
+{
+	int	i = 0;
+
+	for (; i < 10 && src[i] != '\0'; i++)
+		dst[i] = src[i];
+	for (; i < 10; i++)
+		dst[i] = '_';
+	dst[i] = '\0';
+}
+
 static void	render_name_input(t_app *app, int y)
 {
 	char	buffer[64];
@@ -155,11 +166,14 @@ static void	render_name_input(t_app *app, int y)
 	if (app->win == false)
 		return ;
 	if (app->score_saved)
-		snprintf(buffer, sizeof(buffer), "SAVED AS : %s", app->score_name);
-	else if (app->name_input)
-		snprintf(buffer, sizeof(buffer), "NAME : %-10s", app->score_name);
+		snprintf(buffer, sizeof(buffer), "%s", app->score_name);
+	else if (app->name_input) {
+		char name[11];
+		typing_score_name(name, app->score_name);
+		snprintf(buffer, sizeof(buffer), "%s", name);
+	}
 	else
-		snprintf(buffer, sizeof(buffer), "SAVE SCORE (S)");
+		snprintf(buffer, sizeof(buffer), "__________");
 	attron(A_BOLD);
 	print_centered(app, y, buffer);
 	attroff(A_BOLD);

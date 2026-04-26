@@ -6,7 +6,7 @@
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/25 02:57:57 by ldecavel          #+#    #+#             */
-/*   Updated: 2026/04/26 12:04:52 by ldecavel         ###   ########.fr       */
+/*   Updated: 2026/04/26 12:28:01 by ldecavel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -182,7 +182,6 @@ extern t_errcode game_render(t_app *app)
 {
 	check_size(app);
 
-	// TO DELTE
 	erase();
 	render_board(app);
 	refresh();

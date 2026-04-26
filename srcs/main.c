@@ -6,7 +6,7 @@
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/25 01:51:37 by ldecavel          #+#    #+#             */
-/*   Updated: 2026/04/25 17:07:29 by ldecavel         ###   ########.fr       */
+/*   Updated: 2026/04/26 12:27:04 by ldecavel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	main(void)
 	errcode |= signals_init();
 	if (errcode == NO_ERROR) {
 		srand(time(NULL));
-		app_loop();
+		errcode |= app_loop();
 	}
 
 	endwin();
