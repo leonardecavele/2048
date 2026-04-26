@@ -6,7 +6,7 @@
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/25 02:58:57 by ldecavel          #+#    #+#             */
-/*   Updated: 2026/04/26 12:38:13 by ldecavel         ###   ########.fr       */
+/*   Updated: 2026/04/26 15:54:29 by ldecavel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ extern t_errcode menu_update(t_app *app)
 		app->current_view = &app->game_view;
 
 	if (app->user_input == 27)
-		app->exit = true;
+		app->state |= EXIT;
 
 	return NO_ERROR;
 }
