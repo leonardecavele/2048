@@ -6,7 +6,7 @@
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/25 02:37:28 by ldecavel          #+#    #+#             */
-/*   Updated: 2026/04/25 22:33:01 by ldecavel         ###   ########.fr       */
+/*   Updated: 2026/04/26 12:00:06 by ldecavel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ extern void render_invalid_ratio(t_app *app)
 extern void render_frame(t_app *app, int y, int box_w, int box_h)
 {
 	int start_y = y - 1;
-	int start_x = ((app->screen.cols - box_w) / 2) + 1;
+	int start_x = (app->screen.cols - box_w) / 2;
 
 	attron(A_BOLD);
 	mvaddch(start_y, start_x, ACS_ULCORNER);

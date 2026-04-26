@@ -2,3 +2,4 @@ build
 2048
 *.a
 compile_flags.txt
+scores.dat

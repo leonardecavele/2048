@@ -6,7 +6,7 @@
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/25 02:57:57 by ldecavel          #+#    #+#             */
-/*   Updated: 2026/04/25 22:33:34 by ldecavel         ###   ########.fr       */
+/*   Updated: 2026/04/26 12:04:52 by ldecavel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,12 @@
 #include "helpers.h"
 #include "app.h"
 
-extern void game_update(t_app *app)
+extern t_errcode game_update(t_app *app)
 {
 	app->user_input = getch();
 
 	if (app->user_input == ERR)
-		return ;
+		return NO_ERROR;
 
 	if (are_you_winning_son(app->board) && !app->win) {
 		app->win = true;
@@ -54,6 +54,8 @@ extern void game_update(t_app *app)
 		move_right(app->board);
 		add_one_nbr(app->board);
 	}
+
+	return NO_ERROR;
 }
 
 
@@ -176,11 +178,13 @@ static void	render_board(t_app *app)
 }
 
 
-extern void game_render(t_app *app)
+extern t_errcode game_render(t_app *app)
 {
 	check_size(app);
 
+	// TO DELTE
 	erase();
 	render_board(app);
 	refresh();
+	return NO_ERROR;
 }

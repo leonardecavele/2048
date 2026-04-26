@@ -6,7 +6,7 @@
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/16 13:01:36 by ldecavel          #+#    #+#             */
-/*   Updated: 2026/04/25 13:32:32 by ldecavel         ###   ########.fr       */
+/*   Updated: 2026/04/26 11:47:16 by ldecavel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,10 @@ extern t_errcode	errcode_message(t_errcode errcode)
 	}
 
 	if (errcode & NCURSES_ERROR)
-		ft_dprintf(2, "cannot init ncurses\n");
+		ft_dprintf(2, "cannot initializing ncurses\n");
 	if (errcode & SIGNAL_ERROR)
-		ft_dprintf(2, "error with signals\n");
+		ft_dprintf(2, "error initializing signals\n");
+	if (errcode & FILE_ERROR)
+		ft_dprintf(2, "error while registering scores\n");
 	return (errcode);
 }
