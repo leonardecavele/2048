@@ -6,7 +6,7 @@
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/25 02:58:57 by ldecavel          #+#    #+#             */
-/*   Updated: 2026/04/26 16:40:29 by ldecavel         ###   ########.fr       */
+/*   Updated: 2026/04/26 17:32:59 by ldecavel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include <ncurses.h>
 /* intern */
 #include "gameplay.h"
+#include "board.h"
 #include "app.h"
 
 extern t_errcode menu_update(t_app *app)
@@ -31,6 +32,12 @@ extern t_errcode menu_update(t_app *app)
 	if (app->user_input == 27)
 		app->state |= EXIT;
 
+	if (app->user_input == KEY_LEFT && app->board.size > BOARD_MIN)
+		app->board.size -= 1;
+
+	if (app->user_input == KEY_RIGHT && app->board.size < BOARD_MAX)
+		app->board.size += 1;
+
 	if (app->user_input == 's' || app->user_input == 'S')
 		app->current_view = &app->scores_view;
 
@@ -47,14 +54,23 @@ static void render_title(t_app *app, int y)
 	print_centered(app, y + 5,  "|____|\\___/   |_||____|");
 }
 
+static void	render_size_selector(t_app *app, int y)
+{
+	char line[64];
+
+	snprintf(line, sizeof(line), "<   %d   >", app->board.size);
+	print_centered(app, y + 7, "- size -");
+	print_centered(app, y + 8, line);
+}
+
 static void	render_play_button(t_app *app, int y)
 {
-	print_centered(app, y + 7, "                       ");
+	print_centered(app, y + 9, "                       ");
 	attron(A_REVERSE | A_BOLD);
-	print_centered(app, y + 8, "   PLAY (P)   ");
-	print_centered(app, y + 10, "  SCORES (S)  ");
+	print_centered(app, y + 10, "   PLAY (P)   ");
+	print_centered(app, y + 12, "  SCORES (S)  ");
 	attroff(A_REVERSE | A_BOLD);
-	print_centered(app, y + 11, "                       ");
+	print_centered(app, y + 13, "                       ");
 }
 
 
@@ -66,9 +82,10 @@ extern t_errcode menu_render(t_app *app)
 	int r = app->screen.rows;
 
 	erase();
-	render_frame(app, (r / 2) - 5, 29, 14);
+	render_size_selector(app, (r / 2) - 5);
 	render_title(app, (r / 2) - 5);
 	render_play_button(app, (r / 2) - 5);
+	render_frame(app, (r / 2) - 5, 29, 16);
 	refresh();
 
 	return NO_ERROR;
