@@ -6,7 +6,7 @@
 /*   By: gabach <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/26 12:56:06 by gabach            #+#    #+#             */
-/*   Updated: 2026/04/26 15:41:25 by ldecavel         ###   ########.fr       */
+/*   Updated: 2026/04/26 16:19:18 by ldecavel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ typedef struct s_app
 {
 	t_board		board;
 	t_view		menu_view;
+	t_view		scores_view;
 	t_view		game_view;
 	t_view		end_view;
 	t_view		*current_view;

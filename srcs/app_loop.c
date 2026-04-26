@@ -6,7 +6,7 @@
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/25 02:38:23 by ldecavel          #+#    #+#             */
-/*   Updated: 2026/04/26 16:11:40 by ldecavel         ###   ########.fr       */
+/*   Updated: 2026/04/26 16:19:40 by ldecavel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,18 +25,10 @@ extern t_errcode app_loop(void) {
 	t_errcode errcode = NO_ERROR;
 
 	t_app app = {
-		.menu_view = {
-			.update = menu_update,
-			.render = menu_render
-		},
-		.game_view = {
-			.update = game_update,
-			.render = game_render
-		},
-		.end_view = {
-			.update = end_update,
-			.render = end_render
-		},
+		.menu_view = {.update = menu_update, .render = menu_render},
+		.scores_view = {.update = scores_update, .render = scores_render},
+		.game_view = {.update = game_update, .render = game_render},
+		.end_view = {.update = end_update, .render = end_render},
 		.user_input = -1,
 		.board = {.size = 4},
 		.state = (rand() % 2 == 0) << 5

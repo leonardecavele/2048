@@ -26,6 +26,7 @@ SRCS = \
 	views/menu.c \
 	views/game.c \
 	views/end.c \
+	views/scores.c \
 	gameplay/board.c \
 	gameplay/moves.c \
 	gameplay/utils.c \
