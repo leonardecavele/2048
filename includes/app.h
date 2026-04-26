@@ -6,23 +6,26 @@
 /*   By: gabach <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/26 12:56:06 by gabach            #+#    #+#             */
-/*   Updated: 2026/04/26 13:50:54 by gabach           ###   ########.fr       */
+/*   Updated: 2026/04/26 14:08:32 by ldecavel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef APP_H
 #define APP_H
 
-#include "view.h"
-#include "render.h"
-#include "gameplay.h"
+/* extern */
 #include <stdint.h>
 #include <stdbool.h>
 
+/* intern */
+#include "view.h"
+#include "render.h"
+#include "gameplay.h"
+#include "board.h"
 
 typedef struct s_app
 {
-	t_cell		board[BOARD_SIZE][BOARD_SIZE];
+	t_board		board;
 	t_view		menu_view;
 	t_view		game_view;
 	t_view		end_view;
