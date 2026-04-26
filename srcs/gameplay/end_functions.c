@@ -6,7 +6,7 @@
 /*   By: gabach <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/25 16:46:05 by gabach            #+#    #+#             */
-/*   Updated: 2026/04/25 17:29:20 by gabach           ###   ########.fr       */
+/*   Updated: 2026/04/26 12:48:43 by gabach           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	is_win_value_valid(void)
 		power_of_2++;
 	}
 
-	if (power_of_2 > (BOARD_SIZE * BOARD_SIZE))
+	if (power_of_2 > (BOARD_SIZE * BOARD_SIZE) + 1)
 		return (0);
 
 	return (1);
