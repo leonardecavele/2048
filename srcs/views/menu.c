@@ -6,13 +6,13 @@
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/25 02:58:57 by ldecavel          #+#    #+#             */
-/*   Updated: 2026/04/26 12:05:34 by ldecavel         ###   ########.fr       */
+/*   Updated: 2026/04/26 12:38:13 by ldecavel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/* extern imports */
+/* extern */
 #include <ncurses.h>
-/* intern imports */
+/* intern */
 #include "gameplay.h"
 #include "app.h"
 
