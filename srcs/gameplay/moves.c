@@ -6,11 +6,12 @@
 /*   By: gabach <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/25 12:54:20 by gabach            #+#    #+#             */
-/*   Updated: 2026/04/26 13:17:38 by gabach           ###   ########.fr       */
+/*   Updated: 2026/04/26 13:55:45 by gabach           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "gameplay.h"
+#include "app.h"
 #include "libft.h"
 
 t_cell	can_move(int coord1, int coord2, int combined[BOARD_SIZE], t_cell board[BOARD_SIZE][BOARD_SIZE])
