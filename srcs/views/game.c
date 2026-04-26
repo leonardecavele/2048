@@ -6,7 +6,7 @@
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/25 02:57:57 by ldecavel          #+#    #+#             */
-/*   Updated: 2026/04/26 14:36:53 by gabach           ###   ########.fr       */
+/*   Updated: 2026/04/26 14:55:00 by gabach           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,65 +90,65 @@ static void	draw_board_values(
 }
 
 
-static chtype	get_grid_joint(int y, int x)
+static chtype	get_grid_joint(int y, int x, int size)
 {
 	if (y == 0 && x == 0)
 		return (ACS_ULCORNER);
-	if (y == 0 && x == BOARD_SIZE)
+	if (y == 0 && x == size)
 		return (ACS_URCORNER);
-	if (y == BOARD_SIZE && x == 0)
+	if (y == size && x == 0)
 		return (ACS_LLCORNER);
-	if (y == BOARD_SIZE && x == BOARD_SIZE)
+	if (y == size && x == size)
 		return (ACS_LRCORNER);
 	if (y == 0)
 		return (ACS_TTEE);
-	if (y == BOARD_SIZE)
+	if (y == size)
 		return (ACS_BTEE);
 	if (x == 0)
 		return (ACS_LTEE);
-	if (x == BOARD_SIZE)
+	if (x == size)
 		return (ACS_RTEE);
 	return (ACS_PLUS);
 }
 
-static void	draw_grid_lines(int start_y, int start_x, int cell_h, int cell_w)
+static void	draw_grid_lines(int start_y, int start_x, int cell_h, int cell_w, int size)
 {
 	int	y;
 	int	x;
 	int	board_h;
 	int	board_w;
 
-	board_h = cell_h * BOARD_SIZE;
-	board_w = cell_w * BOARD_SIZE;
+	board_h = cell_h * size;
+	board_w = cell_w * size;
 	y = 0;
-	while (y <= BOARD_SIZE)
+	while (y <= size)
 	{
 		mvhline(start_y + y * cell_h, start_x, ACS_HLINE, board_w);
 		y++;
 	}
 	x = 0;
-	while (x <= BOARD_SIZE)
+	while (x <= size)
 	{
 		mvvline(start_y, start_x + x * cell_w, ACS_VLINE, board_h);
 		x++;
 	}
 }
 
-static void	draw_grid_joints(int start_y, int start_x, int cell_h, int cell_w)
+static void	draw_grid_joints(int start_y, int start_x, int cell_h, int cell_w, int size)
 {
 	int	y;
 	int	x;
 
 	y = 0;
-	while (y <= BOARD_SIZE)
+	while (y <= size)
 	{
 		x = 0;
-		while (x <= BOARD_SIZE)
+		while (x <= size)
 		{
 			mvaddch(
 				start_y + y * cell_h,
 				start_x + x * cell_w,
-				get_grid_joint(y, x)
+				get_grid_joint(y, x, size)
 			);
 			x++;
 		}
@@ -161,19 +161,19 @@ static void	render_board(t_app *app)
 	int r = app->screen.rows;
 	int c = app->screen.cols;
 
-	int cell_h = r / BOARD_SIZE;
-	int cell_w = c / BOARD_SIZE;
+	int cell_h = r / app->board.size;
+	int cell_w = c / app->board.size;
 	cell_h = min(cell_h, cell_w / 2);
 	cell_w = cell_h * 2;
 
-	int board_h = cell_h * BOARD_SIZE;
-	int board_w = cell_w * BOARD_SIZE;
+	int board_h = cell_h * app->board.size;
+	int board_w = cell_w * app->board.size;
 
 	int start_x = (c - board_w) / 2;
 	int start_y = (r - board_h) / 2;
 
-	draw_grid_lines(start_y, start_x, cell_h, cell_w);
-	draw_grid_joints(start_y, start_x, cell_h, cell_w);
+	draw_grid_lines(start_y, start_x, cell_h, cell_w, app->board.size);
+	draw_grid_joints(start_y, start_x, cell_h, cell_w, app->board.size);
 	draw_board_values(app, start_y, start_x, cell_h, cell_w);
 }
 
