@@ -23,6 +23,7 @@ SRCS = \
 	helpers.c \
 	score.c \
 	render/render.c \
+	render/font.c \
 	views/menu.c \
 	views/game.c \
 	views/end.c \
