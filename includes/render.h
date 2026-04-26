@@ -6,13 +6,14 @@
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/25 12:21:20 by ldecavel          #+#    #+#             */
-/*   Updated: 2026/04/25 22:33:15 by ldecavel         ###   ########.fr       */
+/*   Updated: 2026/04/26 13:03:57 by gabach           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef RENDER_H
 #define RENDER_H
 
+#include <stdbool.h>
 #include "error.h"
 
 #define TERM_CHAR_RATIO			2

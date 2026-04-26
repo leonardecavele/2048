@@ -6,7 +6,7 @@
 /*   By: gabach <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/25 12:54:20 by gabach            #+#    #+#             */
-/*   Updated: 2026/04/25 16:29:41 by gabach           ###   ########.fr       */
+/*   Updated: 2026/04/26 13:09:13 by gabach           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ t_cell	can_move(int coord1, int coord2, int combined[BOARD_SIZE], t_cell board[B
 	return (2);
 }
 
-void	move_left(t_cell board[BOARD_SIZE][BOARD_SIZE])
+void	move_left(t_app *app)
 {
 	int row;
 	int col;
@@ -51,7 +51,7 @@ void	move_left(t_cell board[BOARD_SIZE][BOARD_SIZE])
 		ft_bzero(combined, sizeof(int) * BOARD_SIZE);
 		while(col < BOARD_SIZE)
 		{
-			if (board[row][col] == 0)
+			if (app->board[row][col] == 0)
 			{
 				col++;
 				continue;
@@ -63,18 +63,21 @@ void	move_left(t_cell board[BOARD_SIZE][BOARD_SIZE])
 						row * BOARD_SIZE + move,
 						row * BOARD_SIZE + move - 1,
 						combined,
-						board
+						app->board
 					);
 				if (is_moving == 1)
-					board[row][move - 1] = board[row][move];
+					app->board[row][move - 1] = app->board[row][move];
 				else if (is_moving == 2)
-					board[row][move - 1] = board[row][move] * 2;
+				{
+					app->score += app->board[row][move] * 2;
+					app->board[row][move - 1] = app->board[row][move] * 2;
+				}
 				else
 				{
 					move--;
 					break;
 				}
-				board[row][move] = 0;
+				app->board[row][move] = 0;
 				move--;
 			}
 			col++;
@@ -83,7 +86,7 @@ void	move_left(t_cell board[BOARD_SIZE][BOARD_SIZE])
 	}
 }
 
-void	move_right(t_cell board[BOARD_SIZE][BOARD_SIZE])
+void	move_right(t_app *app)
 {
 	int row, col, move, is_moving;
 	int combined[BOARD_SIZE];
@@ -95,19 +98,22 @@ void	move_right(t_cell board[BOARD_SIZE][BOARD_SIZE])
 		ft_bzero(combined, sizeof(int) * BOARD_SIZE);
 		while (col >= 0)
 		{
-			if (board[row][col] != 0)
+			if (app->board[row][col] != 0)
 			{
 				move = col;
 				while (move < BOARD_SIZE - 1)
 				{
-					is_moving = can_move(row * BOARD_SIZE + move, row * BOARD_SIZE + move + 1, combined, board);
+					is_moving = can_move(row * BOARD_SIZE + move, row * BOARD_SIZE + move + 1, combined, app->board);
 					if (is_moving == 1)
-						board[row][move + 1] = board[row][move];
+						app->board[row][move + 1] = app->board[row][move];
 					else if (is_moving == 2)
-						board[row][move + 1] = board[row][move] * 2;
+					{
+						app->score += app->board[row][move] * 2;
+						app->board[row][move + 1] = app->board[row][move] * 2;
+					}
 					else
 						break;
-					board[row][move] = 0;
+					app->board[row][move] = 0;
 					if (is_moving == 2) break; // Stop after a merge
 					move++;
 				}
@@ -118,7 +124,7 @@ void	move_right(t_cell board[BOARD_SIZE][BOARD_SIZE])
 	}
 }
 
-void	move_up(t_cell board[BOARD_SIZE][BOARD_SIZE])
+void	move_up(t_app *app)
 {
 	int row, col, move, is_moving;
 	int combined[BOARD_SIZE];
@@ -130,19 +136,22 @@ void	move_up(t_cell board[BOARD_SIZE][BOARD_SIZE])
 		ft_bzero(combined, sizeof(int) * BOARD_SIZE);
 		while (row < BOARD_SIZE)
 		{
-			if (board[row][col] != 0)
+			if (app->board[row][col] != 0)
 			{
 				move = row;
 				while (move > 0)
 				{
-					is_moving = can_move(move * BOARD_SIZE + col, (move - 1) * BOARD_SIZE + col, combined, board);
+					is_moving = can_move(move * BOARD_SIZE + col, (move - 1) * BOARD_SIZE + col, combined, app->board);
 					if (is_moving == 1)
-						board[move - 1][col] = board[move][col];
+						app->board[move - 1][col] = app->board[move][col];
 					else if (is_moving == 2)
-						board[move - 1][col] = board[move][col] * 2;
+					{
+						app->score += app->board[move][col] * 2;
+						app->board[move - 1][col] = app->board[move][col] * 2;
+					}
 					else
 						break;
-					board[move][col] = 0;
+					app->board[move][col] = 0;
 					if (is_moving == 2) break;
 					move--;
 				}
@@ -153,7 +162,7 @@ void	move_up(t_cell board[BOARD_SIZE][BOARD_SIZE])
 	}
 }
 
-void	move_down(t_cell board[BOARD_SIZE][BOARD_SIZE])
+void	move_down(t_app *app)
 {
 	int row, col, move, is_moving;
 	int combined[BOARD_SIZE];
@@ -165,19 +174,22 @@ void	move_down(t_cell board[BOARD_SIZE][BOARD_SIZE])
 		ft_bzero(combined, sizeof(int) * BOARD_SIZE);
 		while (row >= 0)
 		{
-			if (board[row][col] != 0)
+			if (app->board[row][col] != 0)
 			{
 				move = row;
 				while (move < BOARD_SIZE - 1)
 				{
-					is_moving = can_move(move * BOARD_SIZE + col, (move + 1) * BOARD_SIZE + col, combined, board);
+					is_moving = can_move(move * BOARD_SIZE + col, (move + 1) * BOARD_SIZE + col, combined, app->board);
 					if (is_moving == 1)
-						board[move + 1][col] = board[move][col];
+						app->board[move + 1][col] = app->board[move][col];
 					else if (is_moving == 2)
-						board[move + 1][col] = board[move][col] * 2;
+					{
+						app->score += app->board[move][col] * 2;
+						app->board[move + 1][col] = app->board[move][col] * 2;
+					}
 					else
 						break;
-					board[move][col] = 0;
+					app->board[move][col] = 0;
 					if (is_moving == 2) break;
 					move++;
 				}
