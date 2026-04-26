@@ -6,7 +6,7 @@
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/25 02:57:57 by ldecavel          #+#    #+#             */
-/*   Updated: 2026/04/26 17:53:27 by ldecavel         ###   ########.fr       */
+/*   Updated: 2026/04/26 18:01:17 by gabach           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,10 @@ static void	draw_board_values(
 	t_app *app, int start_y, int start_x, int cell_h, int cell_w
 )
 {
+	short	fg;
+	short	bg;
+	int	y;
+	int	x;
 	int	cell_y;
 	int	cell_x;
 	int pair;
@@ -115,14 +119,27 @@ static void	draw_board_values(
 
 			if (val != 0)
 			{
+				attron(A_BOLD);
 				pair = draw_values_color(val, cell_y, cell_x, cell_h, cell_w);
 				int len = nbrlen(val);
 				int v_y = cell_y + cell_h / 2;
 				int v_x = cell_x + (cell_w - len) / 2;
-				
+				int current_idx = y * app->board.size + x;
+
+				if (current_idx == app->board.last_modif)
+				{
+					attroff(COLOR_PAIR(pair));
+					pair_content(pair, &fg, &bg);
+					init_pair(20, COLOR_WHITE, bg);
+					pair = 20;
+					attron(A_BLINK | COLOR_PAIR(20));
+				}
 				if (draw_ascii_value(val, v_y, v_x, cell_h, cell_w))
 					mvprintw(v_y, v_x, "%u", (unsigned int)val);
-				attroff(COLOR_PAIR(pair));
+
+				if (current_idx == app->board.last_modif)
+					attroff(A_BLINK);
+				attroff(COLOR_PAIR(pair) | A_BOLD);
 			}
 		}
 	}

@@ -6,7 +6,7 @@
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/25 02:44:53 by ldecavel          #+#    #+#             */
-/*   Updated: 2026/04/26 14:34:59 by gabach           ###   ########.fr       */
+/*   Updated: 2026/04/26 17:35:56 by gabach           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ void	add_one_nbr(t_board *board)
 	col = available_box[index] % board->size;
 	row = available_box[index] / board->size;
 	board->board[row][col] = generate_number();
+	board->last_modif = row * board->size + col;
 }
 
 void	init_board(t_board *board)
@@ -73,4 +74,5 @@ void	init_board(t_board *board)
 		row = rand() % board->size;
 	}
 	board->board[col][row] = generate_number();
+	board->last_modif = -1;
 }
