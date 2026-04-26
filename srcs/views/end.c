@@ -6,7 +6,7 @@
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/25 02:58:57 by ldecavel          #+#    #+#             */
-/*   Updated: 2026/04/26 12:28:07 by ldecavel         ###   ########.fr       */
+/*   Updated: 2026/04/26 12:33:00 by ldecavel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,7 +166,7 @@ static void	render_name_input(t_app *app, int y)
 	if (app->win == false)
 		return ;
 	if (app->score_saved)
-		snprintf(buffer, sizeof(buffer), "%s", app->score_name);
+		snprintf(buffer, sizeof(buffer), "NAME : %s", app->score_name);
 	else if (app->name_input) {
 		char name[11];
 		typing_score_name(name, app->score_name);
@@ -193,10 +193,15 @@ static void	render_score(t_app *app, int y)
 static void	render_win_buttons(t_app *app, int y)
 {
 	attron(A_REVERSE | A_BOLD);
-	if (app->score_saved == false)
+	if (app->score_saved == false) {
 		print_centered(app, y + 0, " SAVE SCORE (S) ");
-	print_centered(app, y + 2, "  CONTINUE (C)  ");
-	print_centered(app, y + 4, "   EXIT (ESC)   ");
+		print_centered(app, y + 2, "  CONTINUE (C)  ");
+		print_centered(app, y + 4, "   EXIT (ESC)   ");
+	}
+	else {
+		print_centered(app, y + 0, "  CONTINUE (C)  ");
+		print_centered(app, y + 2, "   EXIT (ESC)   ");
+	}
 	attroff(A_REVERSE | A_BOLD);
 }
 
@@ -229,13 +234,17 @@ extern t_errcode end_render(t_app *app)
 		render_defeat_buttons(app, (r / 2) + 3);
 	}
 	else if (app->win == true) {
+		int box_height = 18;
+		if (app->score_saved == true)
+			box_height -= 2;
+
 		if (app->end_message_ver) {
 			render_win(app, (r / 2) - 6);
-			render_frame(app, (r / 2) - 6, 30, 18);
+			render_frame(app, (r / 2) - 6, 30, box_height);
 		}
 		else {
 			render_gg(app, (r / 2) - 6);
-			render_frame(app, (r / 2) - 6, 22, 18);
+			render_frame(app, (r / 2) - 6, 22, box_height);
 		}
 		render_score(app, (r / 2));
 		render_name_input(app, (r / 2) + 2);
