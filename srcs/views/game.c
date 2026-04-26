@@ -6,7 +6,7 @@
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/25 02:57:57 by ldecavel          #+#    #+#             */
-/*   Updated: 2026/04/26 18:51:38 by gabach           ###   ########.fr       */
+/*   Updated: 2026/04/26 18:54:50 by gabach           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,7 +145,7 @@ static void	draw_board_values(
 				{
 					attroff(COLOR_PAIR(pair));
 					pair_content(pair, &fg, &bg);
-					init_pair(20, COLOR_WHITE, bg);
+					init_pair(20, COLOR_RED, bg);
 					pair = 20;
 					attron(A_BLINK | COLOR_PAIR(20));
 				}
