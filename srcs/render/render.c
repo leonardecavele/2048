@@ -6,7 +6,7 @@
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/25 02:37:28 by ldecavel          #+#    #+#             */
-/*   Updated: 2026/04/26 16:42:28 by ldecavel         ###   ########.fr       */
+/*   Updated: 2026/04/26 18:25:22 by gabach           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,6 +143,21 @@ extern bool check_size(t_app *app)
 	int c = app->screen.cols;
 
 	if (r < MIN_ROW || c < MIN_COL) {
+		render_too_small(app);
+		return false;
+	}
+
+	return true;
+}
+
+extern bool check_size_board(t_app *app)
+{
+	getmaxyx(stdscr, app->screen.rows, app->screen.cols);
+
+	int r = app->screen.rows;
+	int c = app->screen.cols;
+
+	if ((r - 1 < app->board.size * 6) || (c - 1 < app->board.size * 6)) {
 		render_too_small(app);
 		return false;
 	}
