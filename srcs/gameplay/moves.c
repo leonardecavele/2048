@@ -6,7 +6,7 @@
 /*   By: gabach <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/25 12:54:20 by gabach            #+#    #+#             */
-/*   Updated: 2026/04/26 14:28:54 by gabach           ###   ########.fr       */
+/*   Updated: 2026/04/26 15:59:11 by ldecavel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ int	move_left(t_app *app)
 					app->board.board[row][move - 1] = app->board.board[row][move];
 				else if (is_moving == 2)
 				{
-					app->score += app->board.board[row][move] * 2;
+					app->current_score.score += app->board.board[row][move] * 2;
 					app->board.board[row][move - 1] = app->board.board[row][move] * 2;
 				}
 				else
@@ -119,7 +119,7 @@ int	move_right(t_app *app)
 						app->board.board[row][move + 1] = app->board.board[row][move];
 					else if (is_moving == 2)
 					{
-						app->score += app->board.board[row][move] * 2;
+						app->current_score.score += app->board.board[row][move] * 2;
 						app->board.board[row][move + 1] = app->board.board[row][move] * 2;
 					}
 					else
@@ -162,7 +162,7 @@ int	move_up(t_app *app)
 						app->board.board[move - 1][col] = app->board.board[move][col];
 					else if (is_moving == 2)
 					{
-						app->score += app->board.board[move][col] * 2;
+						app->current_score.score += app->board.board[move][col] * 2;
 						app->board.board[move - 1][col] = app->board.board[move][col] * 2;
 					}
 					else
@@ -205,7 +205,7 @@ int	move_down(t_app *app)
 						app->board.board[move + 1][col] = app->board.board[move][col];
 					else if (is_moving == 2)
 					{
-						app->score += app->board.board[move][col] * 2;
+						app->current_score.score += app->board.board[move][col] * 2;
 						app->board.board[move + 1][col] = app->board.board[move][col] * 2;
 					}
 					else

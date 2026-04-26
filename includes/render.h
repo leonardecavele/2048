@@ -6,7 +6,7 @@
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/25 12:21:20 by ldecavel          #+#    #+#             */
-/*   Updated: 2026/04/26 13:03:57 by gabach           ###   ########.fr       */
+/*   Updated: 2026/04/26 16:38:48 by ldecavel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,6 @@ void render_invalid_ratio(t_app *app);
 void print_centered(t_app *app, int y, const char *str);
 bool screen_ratio_is_bad(t_app *app);
 void render_frame(t_app *app, int y, int box_w, int box_h);
-void check_size(t_app *app);
+bool check_size(t_app *app);
 
 #endif

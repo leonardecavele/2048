@@ -6,7 +6,7 @@
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/25 02:57:57 by ldecavel          #+#    #+#             */
-/*   Updated: 2026/04/26 16:35:36 by gabach           ###   ########.fr       */
+/*   Updated: 2026/04/26 16:40:33 by ldecavel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,12 @@ extern t_errcode game_update(t_app *app)
 	if (app->user_input == ERR)
 		return NO_ERROR;
 
-	if (are_you_winning_son(&app->board) && !app->win) {
-		app->win = true;
+	if (are_you_winning_son(&app->board) && !(app->state & WIN)) {
+		app->state |= WIN;
 		app->current_view = &app->end_view;
 	}
 	else if (is_loosed(&app->board)) {
-		app->defeat = true;
+		app->state |= DEFEAT;
 		app->current_view = &app->end_view;
 	}
 
@@ -226,7 +226,8 @@ static void	render_board(t_app *app)
 
 extern t_errcode game_render(t_app *app)
 {
-	check_size(app);
+	if (!check_size(app))
+		return NO_ERROR;
 
 	erase();
 	render_board(app);

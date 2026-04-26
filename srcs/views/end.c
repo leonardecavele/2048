@@ -6,7 +6,7 @@
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/25 02:58:57 by ldecavel          #+#    #+#             */
-/*   Updated: 2026/04/26 12:37:57 by ldecavel         ###   ########.fr       */
+/*   Updated: 2026/04/26 16:40:25 by ldecavel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,39 +16,23 @@
 #include "gameplay.h"
 #include "app.h"
 #include "libft.h"
+#include "score.h"
 
 static void	add_name_char(t_app *app, int ch)
 {
-	if (app->score_name_len >= 10)
+	if (app->current_score_name_len >= 10)
 		return ;
-	app->score_name[app->score_name_len] = ch;
-	app->score_name_len++;
-	app->score_name[app->score_name_len] = '\0';
+	app->current_score.name[app->current_score_name_len] = ch;
+	app->current_score_name_len++;
+	app->current_score.name[app->current_score_name_len] = '\0';
 }
 
 static void	remove_name_char(t_app *app)
 {
-	if (app->score_name_len <= 0)
+	if (app->current_score_name_len <= 0)
 		return ;
-	app->score_name_len--;
-	app->score_name[app->score_name_len] = '\0';
-}
-
-static t_errcode	save_score(t_app *app)
-{
-	FILE	*file;
-
-	file = fopen("scores.dat", "a");
-	if (file == NULL)
-		return (FILE_ERROR);
-	if (fprintf(file, "%s %ld\n", app->score_name, app->score) < 0) {
-		fclose(file);
-		return (FILE_ERROR);
-	}
-	if (fclose(file) == EOF)
-		return (FILE_ERROR);
-	app->score_saved = true;
-	return (0);
+	app->current_score_name_len--;
+	app->current_score.name[app->current_score_name_len] = '\0';
 }
 
 static t_errcode	handle_name_input(t_app *app)
@@ -56,25 +40,25 @@ static t_errcode	handle_name_input(t_app *app)
 	if (app->user_input == '\n'
 		|| app->user_input == '\r'
 		|| app->user_input == KEY_ENTER) {
-		if (app->score_name_len > 0) {
-			app->name_input = false;
-			return (save_score(app));
+		if (app->current_score_name_len > 0) {
+			app->state &= ~NAME_INPUT;
+			return save_score(app);
 		}
-		return (0);
+		return NO_ERROR;
 	}
 	if (app->user_input == 27) {
-		app->name_input = false;
-		return (0);
+		app->state &= ~NAME_INPUT;
+		return NO_ERROR;
 	}
 	if (app->user_input == KEY_BACKSPACE
 		|| app->user_input == 127
 		|| app->user_input == '\b') {
 		remove_name_char(app);
-		return (0);
+		return NO_ERROR;
 	}
 	if (ft_isalpha(app->user_input))
 		add_name_char(app, ft_toupper(app->user_input));
-	return (0);
+	return NO_ERROR;
 }
 
 extern t_errcode	end_update(t_app *app)
@@ -82,26 +66,26 @@ extern t_errcode	end_update(t_app *app)
 	app->user_input = getch();
 
 	if (app->user_input == ERR)
-		return (NO_ERROR);
+		return NO_ERROR;
 
-	if (app->name_input)
-		return (handle_name_input(app));
+	if (app->state & NAME_INPUT)
+		return handle_name_input(app);
 
 	if (app->user_input == 27)
-		app->exit = true;
-	if (app->win == true
-		&& app->score_saved == false
+		app->state |= EXIT;
+	if (app->state & WIN
+		&& !(app->state & SCORE_SAVED)
 		&& (app->user_input == 's' || app->user_input == 'S')) {
-		app->score_name_len = 0;
-		app->score_name[0] = '\0';
-		app->name_input = true;
-		return (NO_ERROR);
+		app->current_score_name_len = 0;
+		app->current_score.name[0] = '\0';
+		app->state |= NAME_INPUT;
+		return NO_ERROR;
 	}
-	if (!app->defeat && !app->score_saved
+	if (!(app->state & DEFEAT) && !(app->state & SCORE_SAVED)
 		&& (app->user_input == 'c' || app->user_input == 'C'))
 		app->current_view = &app->game_view;
 
-	return (NO_ERROR);
+	return NO_ERROR;
 }
 
 static void	render_gg(t_app *app, int y)
@@ -163,13 +147,13 @@ static void	render_name_input(t_app *app, int y)
 {
 	char	buffer[64];
 
-	if (app->win == false)
+	if (!(app->state & WIN))
 		return ;
-	if (app->score_saved)
-		snprintf(buffer, sizeof(buffer), "NAME : %s", app->score_name);
-	else if (app->name_input) {
+	if (app->state & SCORE_SAVED)
+		snprintf(buffer, sizeof(buffer), "NAME : %s", app->current_score.name);
+	else if (app->state & NAME_INPUT) {
 		char name[11];
-		typing_score_name(name, app->score_name);
+		typing_score_name(name, app->current_score.name);
 		snprintf(buffer, sizeof(buffer), "%s", name);
 	}
 	else
@@ -184,7 +168,7 @@ static void	render_score(t_app *app, int y)
 {
 	char	buffer[64];
 
-	snprintf(buffer, sizeof(buffer), "SCORE : %ld", app->score);
+	snprintf(buffer, sizeof(buffer), "SCORE : %ld", app->current_score.score);
 	attron(A_BOLD);
 	print_centered(app, y, buffer);
 	attroff(A_BOLD);
@@ -193,7 +177,7 @@ static void	render_score(t_app *app, int y)
 static void	render_win_buttons(t_app *app, int y)
 {
 	attron(A_REVERSE | A_BOLD);
-	if (app->score_saved == false) {
+	if (!(app->state & SCORE_SAVED)) {
 		print_centered(app, y + 0, " SAVE SCORE (S) ");
 		print_centered(app, y + 2, "  CONTINUE (C)  ");
 		print_centered(app, y + 4, "   EXIT (ESC)   ");
@@ -221,23 +205,24 @@ static void	render_defeat_buttons(t_app *app, int y)
 
 extern t_errcode end_render(t_app *app)
 {
-	check_size(app);
+	if (!check_size(app))
+		return NO_ERROR;
 
 	int	r = app->screen.rows;
 
 	erase();
-	if (app->defeat == true) {
+	if (app->state & DEFEAT) {
 		render_defeat_title(app, (r / 2) - 5);
 		render_frame(app, (r / 2) - 5, 41, 12);
 		render_score(app, (r / 2) + 1);
 		render_defeat_buttons(app, (r / 2) + 3);
 	}
-	else if (app->win == true) {
+	else if (app->state & WIN) {
 		int box_height = 18;
-		if (app->score_saved == true)
+		if (app->state & SCORE_SAVED)
 			box_height -= 4;
 
-		if (app->end_message_ver) {
+		if (app->state & END_MESSAGE_VER) {
 			render_win(app, (r / 2) - 6);
 			render_frame(app, (r / 2) - 6, 30, box_height);
 		}
