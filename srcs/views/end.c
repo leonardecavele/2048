@@ -6,7 +6,7 @@
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/25 02:58:57 by ldecavel          #+#    #+#             */
-/*   Updated: 2026/04/26 12:37:57 by ldecavel         ###   ########.fr       */
+/*   Updated: 2026/04/26 14:33:38 by ldecavel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,19 +36,17 @@ static void	remove_name_char(t_app *app)
 
 static t_errcode	save_score(t_app *app)
 {
-	FILE	*file;
-
-	file = fopen("scores.dat", "a");
+	FILE *file = fopen("scores.dat", "a");
 	if (file == NULL)
-		return (FILE_ERROR);
+		return FILE_ERROR;
 	if (fprintf(file, "%s %ld\n", app->score_name, app->score) < 0) {
 		fclose(file);
-		return (FILE_ERROR);
+		return FILE_ERROR;
 	}
 	if (fclose(file) == EOF)
-		return (FILE_ERROR);
+		return FILE_ERROR;
 	app->score_saved = true;
-	return (0);
+	return NO_ERROR;
 }
 
 static t_errcode	handle_name_input(t_app *app)
@@ -58,23 +56,23 @@ static t_errcode	handle_name_input(t_app *app)
 		|| app->user_input == KEY_ENTER) {
 		if (app->score_name_len > 0) {
 			app->name_input = false;
-			return (save_score(app));
+			return save_score(app);
 		}
-		return (0);
+		return NO_ERROR;
 	}
 	if (app->user_input == 27) {
 		app->name_input = false;
-		return (0);
+		return NO_ERROR;
 	}
 	if (app->user_input == KEY_BACKSPACE
 		|| app->user_input == 127
 		|| app->user_input == '\b') {
 		remove_name_char(app);
-		return (0);
+		return NO_ERROR;
 	}
 	if (ft_isalpha(app->user_input))
 		add_name_char(app, ft_toupper(app->user_input));
-	return (0);
+	return NO_ERROR;
 }
 
 extern t_errcode	end_update(t_app *app)
@@ -82,10 +80,10 @@ extern t_errcode	end_update(t_app *app)
 	app->user_input = getch();
 
 	if (app->user_input == ERR)
-		return (NO_ERROR);
+		return NO_ERROR;
 
 	if (app->name_input)
-		return (handle_name_input(app));
+		return handle_name_input(app);
 
 	if (app->user_input == 27)
 		app->exit = true;
@@ -95,13 +93,13 @@ extern t_errcode	end_update(t_app *app)
 		app->score_name_len = 0;
 		app->score_name[0] = '\0';
 		app->name_input = true;
-		return (NO_ERROR);
+		return NO_ERROR;
 	}
 	if (!app->defeat && !app->score_saved
 		&& (app->user_input == 'c' || app->user_input == 'C'))
 		app->current_view = &app->game_view;
 
-	return (NO_ERROR);
+	return NO_ERROR;
 }
 
 static void	render_gg(t_app *app, int y)

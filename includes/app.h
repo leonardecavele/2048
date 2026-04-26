@@ -6,7 +6,7 @@
 /*   By: gabach <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/26 12:56:06 by gabach            #+#    #+#             */
-/*   Updated: 2026/04/26 13:50:54 by gabach           ###   ########.fr       */
+/*   Updated: 2026/04/26 14:20:32 by ldecavel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 #include <stdint.h>
 #include <stdbool.h>
 
-
+/* do other structures */
 typedef struct s_app
 {
 	t_cell		board[BOARD_SIZE][BOARD_SIZE];
@@ -28,13 +28,19 @@ typedef struct s_app
 	t_view		end_view;
 	t_view		*current_view;
 	t_screen	screen;
-	int64_t		score;
 	int			user_input;
-	bool		exit;
+
 	bool		end_message_ver;
+
+	/* state */
 	bool		win;
+	bool		exit;
 	bool		defeat;
+
+	/* score */
+	char		score_names[10][11];
 	char		score_name[11];
+	int64_t		score;
 	int			score_name_len;
 	bool		name_input;
 	bool		score_saved;
