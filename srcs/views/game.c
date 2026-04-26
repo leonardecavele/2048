@@ -6,7 +6,7 @@
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/25 02:57:57 by ldecavel          #+#    #+#             */
-/*   Updated: 2026/04/26 18:01:17 by gabach           ###   ########.fr       */
+/*   Updated: 2026/04/26 18:03:27 by gabach           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,8 +104,6 @@ static void	draw_board_values(
 {
 	short	fg;
 	short	bg;
-	int	y;
-	int	x;
 	int	cell_y;
 	int	cell_x;
 	int pair;
@@ -183,7 +181,7 @@ static void	draw_grid_lines(int start_y, int start_x, int cell_h, int cell_w, in
 static void	draw_grid_joints(int start_y, int start_x, int cell_h, int cell_w, int size)
 {
 	for (int y = 0; y <= size; y++) {
-		for (int x = 0; int x <= size; x++) {
+		for (int x = 0; x <= size; x++) {
 			mvaddch(
 				start_y + y * cell_h,
 				start_x + x * cell_w,
