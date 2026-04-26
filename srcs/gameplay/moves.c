@@ -6,28 +6,29 @@
 /*   By: gabach <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/25 12:54:20 by gabach            #+#    #+#             */
-/*   Updated: 2026/04/26 13:55:45 by gabach           ###   ########.fr       */
+/*   Updated: 2026/04/26 14:28:54 by gabach           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "gameplay.h"
 #include "app.h"
 #include "libft.h"
+#include "board.h"
 
-t_cell	can_move(int coord1, int coord2, int combined[BOARD_SIZE], t_cell board[BOARD_SIZE][BOARD_SIZE])
+t_cell	can_move(int coord1, int coord2, int combined[BOARD_MAX], t_board *board)
 {
 	int	index;
 	int	nbr1;
 	int	nbr2;
 
-	nbr1 = board[coord1 / BOARD_SIZE][coord1 % BOARD_SIZE];
-	nbr2 = board[coord2 / BOARD_SIZE][coord2 % BOARD_SIZE];
+	nbr1 = board->board[coord1 / board->size][coord1 % board->size];
+	nbr2 = board->board[coord2 / board->size][coord2 % board->size];
 	if (nbr2 == 0)
 		return (1);
 	if (nbr1 != nbr2)
 		return (0);
 	index = 0;
-	while(index < BOARD_SIZE && combined[index] !=0)
+	while(index < board->size && combined[index] !=0)
 	{
 		if (coord1 == combined[index] || coord2 == combined[index])
 			return (0);
@@ -43,18 +44,18 @@ int	move_left(t_app *app)
 	int col;
 	int move;
 	int is_moving;
-	int combined[BOARD_SIZE];
+	int combined[BOARD_MAX];
 	int has_moved;
 
 	row = 0;
 	has_moved = 0;
-	while (row < BOARD_SIZE)
+	while (row < app->board.size)
 	{
 		col = 1;
-		ft_bzero(combined, sizeof(int) * BOARD_SIZE);
-		while(col < BOARD_SIZE)
+		ft_bzero(combined, sizeof(int) * BOARD_MAX);
+		while(col < app->board.size)
 		{
-			if (app->board[row][col] == 0)
+			if (app->board.board[row][col] == 0)
 			{
 				col++;
 				continue;
@@ -63,26 +64,26 @@ int	move_left(t_app *app)
 			while (move > 0)
 			{
 				is_moving = can_move(
-						row * BOARD_SIZE + move,
-						row * BOARD_SIZE + move - 1,
+						row * app->board.size + move,
+						row * app->board.size + move - 1,
 						combined,
-						app->board
+						&app->board
 					);
 				if (is_moving && !has_moved)
 					has_moved = 1;
 				if (is_moving == 1)
-					app->board[row][move - 1] = app->board[row][move];
+					app->board.board[row][move - 1] = app->board.board[row][move];
 				else if (is_moving == 2)
 				{
-					app->score += app->board[row][move] * 2;
-					app->board[row][move - 1] = app->board[row][move] * 2;
+					app->score += app->board.board[row][move] * 2;
+					app->board.board[row][move - 1] = app->board.board[row][move] * 2;
 				}
 				else
 				{
 					move--;
 					break;
 				}
-				app->board[row][move] = 0;
+				app->board.board[row][move] = 0;
 				move--;
 			}
 			col++;
@@ -95,35 +96,35 @@ int	move_left(t_app *app)
 int	move_right(t_app *app)
 {
 	int row, col, move, is_moving;
-	int combined[BOARD_SIZE];
+	int combined[BOARD_MAX];
 	int has_moved;
 
 	has_moved = 0;
 	row = 0;
-	while (row < BOARD_SIZE)
+	while (row < app->board.size)
 	{
-		col = BOARD_SIZE - 2; // Start from the right side
-		ft_bzero(combined, sizeof(int) * BOARD_SIZE);
+		col = app->board.size - 2; // Start from the right side
+		ft_bzero(combined, sizeof(int) * BOARD_MAX);
 		while (col >= 0)
 		{
-			if (app->board[row][col] != 0)
+			if (app->board.board[row][col] != 0)
 			{
 				move = col;
-				while (move < BOARD_SIZE - 1)
+				while (move < app->board.size - 1)
 				{
-					is_moving = can_move(row * BOARD_SIZE + move, row * BOARD_SIZE + move + 1, combined, app->board);
+					is_moving = can_move(row * app->board.size + move, row * app->board.size + move + 1, combined, &app->board);
 					if (is_moving && !has_moved)
 						has_moved = 1;
 					if (is_moving == 1)
-						app->board[row][move + 1] = app->board[row][move];
+						app->board.board[row][move + 1] = app->board.board[row][move];
 					else if (is_moving == 2)
 					{
-						app->score += app->board[row][move] * 2;
-						app->board[row][move + 1] = app->board[row][move] * 2;
+						app->score += app->board.board[row][move] * 2;
+						app->board.board[row][move + 1] = app->board.board[row][move] * 2;
 					}
 					else
 						break;
-					app->board[row][move] = 0;
+					app->board.board[row][move] = 0;
 					if (is_moving == 2) break; // Stop after a merge
 					move++;
 				}
@@ -138,35 +139,35 @@ int	move_right(t_app *app)
 int	move_up(t_app *app)
 {
 	int row, col, move, is_moving;
-	int combined[BOARD_SIZE];
+	int combined[BOARD_MAX];
 	int has_moved;
 
 	has_moved = 0;
 	col = 0;
-	while (col < BOARD_SIZE)
+	while (col < app->board.size)
 	{
 		row = 1; // Start from second row
-		ft_bzero(combined, sizeof(int) * BOARD_SIZE);
-		while (row < BOARD_SIZE)
+		ft_bzero(combined, sizeof(int) * BOARD_MAX);
+		while (row < app->board.size)
 		{
-			if (app->board[row][col] != 0)
+			if (app->board.board[row][col] != 0)
 			{
 				move = row;
 				while (move > 0)
 				{
-					is_moving = can_move(move * BOARD_SIZE + col, (move - 1) * BOARD_SIZE + col, combined, app->board);
+					is_moving = can_move(move * app->board.size + col, (move - 1) * app->board.size + col, combined, &app->board);
 					if (is_moving && !has_moved)
 						has_moved = 1;
 					if (is_moving == 1)
-						app->board[move - 1][col] = app->board[move][col];
+						app->board.board[move - 1][col] = app->board.board[move][col];
 					else if (is_moving == 2)
 					{
-						app->score += app->board[move][col] * 2;
-						app->board[move - 1][col] = app->board[move][col] * 2;
+						app->score += app->board.board[move][col] * 2;
+						app->board.board[move - 1][col] = app->board.board[move][col] * 2;
 					}
 					else
 						break;
-					app->board[move][col] = 0;
+					app->board.board[move][col] = 0;
 					if (is_moving == 2) break;
 					move--;
 				}
@@ -181,35 +182,35 @@ int	move_up(t_app *app)
 int	move_down(t_app *app)
 {
 	int row, col, move, is_moving;
-	int combined[BOARD_SIZE];
+	int combined[BOARD_MAX];
 	int has_moved;
 
 	has_moved = 0;
 	col = 0;
-	while (col < BOARD_SIZE)
+	while (col < app->board.size)
 	{
-		row = BOARD_SIZE - 2; // Start from bottom-ish
-		ft_bzero(combined, sizeof(int) * BOARD_SIZE);
+		row = app->board.size - 2; // Start from bottom-ish
+		ft_bzero(combined, sizeof(int) * app->board.size);
 		while (row >= 0)
 		{
-			if (app->board[row][col] != 0)
+			if (app->board.board[row][col] != 0)
 			{
 				move = row;
-				while (move < BOARD_SIZE - 1)
+				while (move < app->board.size - 1)
 				{
-					is_moving = can_move(move * BOARD_SIZE + col, (move + 1) * BOARD_SIZE + col, combined, app->board);
+					is_moving = can_move(move * app->board.size + col, (move + 1) * app->board.size + col, combined, &app->board);
 					if (is_moving && !has_moved)
 						has_moved = 1;
 					if (is_moving == 1)
-						app->board[move + 1][col] = app->board[move][col];
+						app->board.board[move + 1][col] = app->board.board[move][col];
 					else if (is_moving == 2)
 					{
-						app->score += app->board[move][col] * 2;
-						app->board[move + 1][col] = app->board[move][col] * 2;
+						app->score += app->board.board[move][col] * 2;
+						app->board.board[move + 1][col] = app->board.board[move][col] * 2;
 					}
 					else
 						break;
-					app->board[move][col] = 0;
+					app->board.board[move][col] = 0;
 					if (is_moving == 2) break;
 					move++;
 				}

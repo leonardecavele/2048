@@ -6,7 +6,7 @@
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/25 02:57:57 by ldecavel          #+#    #+#             */
-/*   Updated: 2026/04/26 13:48:00 by ldecavel         ###   ########.fr       */
+/*   Updated: 2026/04/26 14:36:53 by gabach           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,11 @@ extern t_errcode game_update(t_app *app)
 	if (app->user_input == ERR)
 		return NO_ERROR;
 
-	if (are_you_winning_son(app->board) && !app->win) {
+	if (are_you_winning_son(&app->board) && !app->win) {
 		app->win = true;
 		app->current_view = &app->end_view;
 	}
-	else if (is_loosed(app->board)) {
+	else if (is_loosed(&app->board)) {
 		app->defeat = true;
 		app->current_view = &app->end_view;
 	}
@@ -40,19 +40,19 @@ extern t_errcode game_update(t_app *app)
 
 	if (app->user_input == KEY_UP) {
 		if (move_up(app))
-			add_one_nbr(app->board);
+			add_one_nbr(&app->board);
 	}
 	else if (app->user_input == KEY_DOWN) {
 		if (move_down(app))
-			add_one_nbr(app->board);
+			add_one_nbr(&app->board);
 	}
 	else if (app->user_input == KEY_LEFT) {
 		if (move_left(app))
-			add_one_nbr(app->board);
+			add_one_nbr(&app->board);
 	}
 	else if (app->user_input == KEY_RIGHT) {
 		if (move_right(app))
-			add_one_nbr(app->board);
+			add_one_nbr(&app->board);
 	}
 
 	return NO_ERROR;
@@ -70,18 +70,18 @@ static void	draw_board_values(
 	int	len;
 
 	y = 0;
-	while (y < BOARD_SIZE)
+	while (y < app->board.size)
 	{
 		x = 0;
-		while (x < BOARD_SIZE)
+		while (x < app->board.size)
 		{
-			if (app->board[y][x] != 0)
+			if (app->board.board[y][x] != 0)
 			{
-				len = nbrlen(app->board[y][x]);
+				len = nbrlen(app->board.board[y][x]);
 				value_y = start_y + y * cell_h + cell_h / 2;
 				value_x = start_x + x * cell_w + (cell_w - len) / 2;
 				mvprintw(value_y, value_x, "%u",
-					(unsigned int)app->board[y][x]);
+					(unsigned int)app->board.board[y][x]);
 			}
 			x++;
 		}

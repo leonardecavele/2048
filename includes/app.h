@@ -6,7 +6,7 @@
 /*   By: gabach <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/26 12:56:06 by gabach            #+#    #+#             */
-/*   Updated: 2026/04/26 14:08:32 by ldecavel         ###   ########.fr       */
+/*   Updated: 2026/04/26 14:29:03 by gabach           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@
 /* intern */
 #include "view.h"
 #include "render.h"
-#include "gameplay.h"
 #include "board.h"
 
 typedef struct s_app
