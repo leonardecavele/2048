@@ -6,7 +6,7 @@
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/25 02:58:57 by ldecavel          #+#    #+#             */
-/*   Updated: 2026/04/26 16:53:44 by ldecavel         ###   ########.fr       */
+/*   Updated: 2026/04/26 17:18:15 by ldecavel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,13 +49,28 @@ static void	render_play_button(t_app *app, int y)
 
 static void	render_scores(t_app *app, int y)
 {
-	char	line[64];
+	char line[64];
+	int order[10];
+
+	for (int i = 0; i < 10; i++)
+		order[i] = i;
+
+	for (int i = 0; i < 9; i++) {
+		for (int j = 0; j < 9 - i; j++) {
+			if (app->scores[order[j]].score < app->scores[order[j + 1]].score) {
+				int tmp = order[j];
+				order[j] = order[j + 1];
+				order[j + 1] = tmp;
+			}
+		}
+	}
 
 	for (int i = 0; i < 10; i++) {
 		snprintf(
 			line, sizeof(line), "%s: %ld",
-			app->scores[i].name, app->scores[i].score
-			);
+			app->scores[order[i]].name,
+			app->scores[order[i]].score
+		);
 		print_centered(app, y + i, line);
 	}
 }
