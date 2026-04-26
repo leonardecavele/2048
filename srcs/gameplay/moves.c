@@ -6,7 +6,7 @@
 /*   By: gabach <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/25 12:54:20 by gabach            #+#    #+#             */
-/*   Updated: 2026/04/26 19:53:24 by gabach           ###   ########.fr       */
+/*   Updated: 2026/04/26 20:32:45 by ldecavel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,10 +79,7 @@ int	move_left(t_app *app)
 					app->board.board[row][move - 1] = app->board.board[row][move] * 2;
 				}
 				else
-				{
-					move--;
 					break;
-				}
 				app->board.board[row][move] = 0;
 				move--;
 			}
@@ -123,10 +120,7 @@ int	move_right(t_app *app)
 						app->board.board[row][move + 1] = app->board.board[row][move] * 2;
 					}
 					else
-					{
-						move++;
 						break;
-					}
 					app->board.board[row][move] = 0;
 					move++;
 				}
@@ -168,10 +162,7 @@ int	move_up(t_app *app)
 						app->board.board[move - 1][col] = app->board.board[move][col] * 2;
 					}
 					else
-					{
-						move--;
 						break;
-					}
 					app->board.board[move][col] = 0;
 					move--;
 				}
@@ -213,10 +204,7 @@ int	move_down(t_app *app)
 						app->board.board[move + 1][col] = app->board.board[move][col] * 2;
 					}
 					else
-					{
-						move++;
 						break;
-					}
 					app->board.board[move][col] = 0;
 					move++;
 				}
