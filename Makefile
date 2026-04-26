@@ -47,6 +47,7 @@ $(BUILD_DIR)/%.o: $(SRCS_DIR)/%.c
 
 clean:
 	rm -rf $(BUILD_DIR)
+	@$(MAKE) -C $(LIBFT_DIR) clean --no-print-directory
 
 fclean: clean
 	rm -f $(NAME)
