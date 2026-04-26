@@ -6,7 +6,7 @@
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/25 02:58:57 by ldecavel          #+#    #+#             */
-/*   Updated: 2026/04/26 19:00:04 by ldecavel         ###   ########.fr       */
+/*   Updated: 2026/04/26 19:55:24 by ldecavel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -240,9 +240,9 @@ static void	render_pause_screen(t_app *app)
 
 extern t_errcode	end_render(t_app *app)
 {
+	erase();
 	if (!check_size(app))
 		return NO_ERROR;
-	erase();
 	if (app->state & DEFEAT)
 		render_defeat_screen(app);
 	else if (app->state & WIN)

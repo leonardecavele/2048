@@ -6,7 +6,7 @@
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/25 02:58:57 by ldecavel          #+#    #+#             */
-/*   Updated: 2026/04/26 19:01:57 by ldecavel         ###   ########.fr       */
+/*   Updated: 2026/04/26 19:55:47 by ldecavel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,10 +77,10 @@ static void	render_scores(t_app *app, int y)
 
 extern t_errcode	scores_render(t_app *app)
 {
+	erase();
 	if (!check_size(app))
 		return NO_ERROR;
 	int top = (app->screen.rows - 22) / 2;
-	erase();
 	render_frame(app, top + 1, 40, 23);
 	render_title(app, top + 1);
 	render_scores(app, top + 9);

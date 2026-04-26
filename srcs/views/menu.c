@@ -6,7 +6,7 @@
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/25 02:58:57 by ldecavel          #+#    #+#             */
-/*   Updated: 2026/04/26 19:01:37 by ldecavel         ###   ########.fr       */
+/*   Updated: 2026/04/26 19:55:51 by ldecavel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,10 +69,10 @@ static void	render_play_button(t_app *app, int y)
 
 extern t_errcode	menu_render(t_app *app)
 {
+	erase();
 	if (!check_size(app))
 		return NO_ERROR;
 	int top = (app->screen.rows - 16) / 2;
-	erase();
 	render_frame(app, top + 1, 29, 17);
 	render_title(app, top + 1);
 	render_size_selector(app, top + 9);
