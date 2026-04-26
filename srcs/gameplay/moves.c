@@ -6,7 +6,7 @@
 /*   By: gabach <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/25 12:54:20 by gabach            #+#    #+#             */
-/*   Updated: 2026/04/26 15:59:11 by ldecavel         ###   ########.fr       */
+/*   Updated: 2026/04/26 19:53:24 by gabach           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ t_cell	can_move(int coord1, int coord2, int combined[BOARD_MAX], t_board *board)
 	if (nbr1 != nbr2)
 		return (0);
 	index = 0;
-	while(index < board->size && combined[index] !=0)
+	while(index < board->size && combined[index] != -1)
 	{
 		if (coord1 == combined[index] || coord2 == combined[index])
 			return (0);
@@ -52,7 +52,7 @@ int	move_left(t_app *app)
 	while (row < app->board.size)
 	{
 		col = 1;
-		ft_bzero(combined, sizeof(int) * BOARD_MAX);
+		init_combined(combined);
 		while(col < app->board.size)
 		{
 			if (app->board.board[row][col] == 0)
@@ -104,7 +104,7 @@ int	move_right(t_app *app)
 	while (row < app->board.size)
 	{
 		col = app->board.size - 2; // Start from the right side
-		ft_bzero(combined, sizeof(int) * BOARD_MAX);
+		init_combined(combined);
 		while (col >= 0)
 		{
 			if (app->board.board[row][col] != 0)
@@ -123,9 +123,11 @@ int	move_right(t_app *app)
 						app->board.board[row][move + 1] = app->board.board[row][move] * 2;
 					}
 					else
+					{
+						move++;
 						break;
+					}
 					app->board.board[row][move] = 0;
-					if (is_moving == 2) break; // Stop after a merge
 					move++;
 				}
 			}
@@ -147,7 +149,7 @@ int	move_up(t_app *app)
 	while (col < app->board.size)
 	{
 		row = 1; // Start from second row
-		ft_bzero(combined, sizeof(int) * BOARD_MAX);
+		init_combined(combined);
 		while (row < app->board.size)
 		{
 			if (app->board.board[row][col] != 0)
@@ -166,9 +168,11 @@ int	move_up(t_app *app)
 						app->board.board[move - 1][col] = app->board.board[move][col] * 2;
 					}
 					else
+					{
+						move--;
 						break;
+					}
 					app->board.board[move][col] = 0;
-					if (is_moving == 2) break;
 					move--;
 				}
 			}
@@ -190,7 +194,7 @@ int	move_down(t_app *app)
 	while (col < app->board.size)
 	{
 		row = app->board.size - 2; // Start from bottom-ish
-		ft_bzero(combined, sizeof(int) * app->board.size);
+		init_combined(combined);
 		while (row >= 0)
 		{
 			if (app->board.board[row][col] != 0)
@@ -209,9 +213,11 @@ int	move_down(t_app *app)
 						app->board.board[move + 1][col] = app->board.board[move][col] * 2;
 					}
 					else
+					{
+						move++;
 						break;
+					}
 					app->board.board[move][col] = 0;
-					if (is_moving == 2) break;
 					move++;
 				}
 			}

@@ -6,7 +6,7 @@
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/26 14:04:09 by ldecavel          #+#    #+#             */
-/*   Updated: 2026/04/26 19:07:36 by ldecavel         ###   ########.fr       */
+/*   Updated: 2026/04/26 19:41:44 by gabach           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,6 @@ void	init_board(t_board *board);
 void	add_one_nbr(t_board *board);
 int		are_you_winning_son(t_board *board);
 int		is_loosed(t_board *board);
+void	init_combined(int combined[BOARD_MAX]);
 
 #endif
