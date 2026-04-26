@@ -6,7 +6,7 @@
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/13 13:23:36 by ldecavel          #+#    #+#             */
-/*   Updated: 2026/04/26 11:47:29 by ldecavel         ###   ########.fr       */
+/*   Updated: 2026/04/26 15:10:58 by ldecavel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ typedef enum e_errcodes
 	INVALID_ARG_ERROR = (1 << 1),
 	NCURSES_ERROR = (1 << 2),
 	SIGNAL_ERROR = (1 << 3),
-	FILE_ERROR = (1 << 4)
+	FILE_ERROR = (1 << 4),
+	PARSE_ERROR = (1 << 5)
 }	t_errcodes;
 
 t_errcode	errcode_message(t_errcode errcode);

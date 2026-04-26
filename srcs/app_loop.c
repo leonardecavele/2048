@@ -6,7 +6,7 @@
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/25 02:38:23 by ldecavel          #+#    #+#             */
-/*   Updated: 2026/04/26 14:24:16 by ldecavel         ###   ########.fr       */
+/*   Updated: 2026/04/26 15:11:12 by ldecavel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <stdlib.h>
 /* intern */
 #include "view.h"
-#include "parsing.h"
+#include "score.h"
 #include "error.h"
 #include "signals.h"
 #include "render.h"

@@ -21,6 +21,7 @@ SRCS = \
 	signals.c \
 	app_loop.c \
 	helpers.c \
+	score.c \
 	render/render.c \
 	views/menu.c \
 	views/game.c \

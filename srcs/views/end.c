@@ -6,7 +6,7 @@
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/25 02:58:57 by ldecavel          #+#    #+#             */
-/*   Updated: 2026/04/26 14:33:38 by ldecavel         ###   ########.fr       */
+/*   Updated: 2026/04/26 15:30:12 by ldecavel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include "gameplay.h"
 #include "app.h"
 #include "libft.h"
+#include "score.h"
 
 static void	add_name_char(t_app *app, int ch)
 {
@@ -32,21 +33,6 @@ static void	remove_name_char(t_app *app)
 		return ;
 	app->score_name_len--;
 	app->score_name[app->score_name_len] = '\0';
-}
-
-static t_errcode	save_score(t_app *app)
-{
-	FILE *file = fopen("scores.dat", "a");
-	if (file == NULL)
-		return FILE_ERROR;
-	if (fprintf(file, "%s %ld\n", app->score_name, app->score) < 0) {
-		fclose(file);
-		return FILE_ERROR;
-	}
-	if (fclose(file) == EOF)
-		return FILE_ERROR;
-	app->score_saved = true;
-	return NO_ERROR;
 }
 
 static t_errcode	handle_name_input(t_app *app)

@@ -6,7 +6,7 @@
 /*   By: gabach <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/26 12:56:06 by gabach            #+#    #+#             */
-/*   Updated: 2026/04/26 14:20:32 by ldecavel         ###   ########.fr       */
+/*   Updated: 2026/04/26 15:31:44 by ldecavel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 #include "gameplay.h"
 #include <stdint.h>
 #include <stdbool.h>
+#include "score.h"
 
 /* do other structures */
 typedef struct s_app
@@ -38,7 +39,7 @@ typedef struct s_app
 	bool		defeat;
 
 	/* score */
-	char		score_names[10][11];
+	t_score		scores[10];
 	char		score_name[11];
 	int64_t		score;
 	int			score_name_len;
