@@ -6,7 +6,7 @@
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/25 02:44:53 by ldecavel          #+#    #+#             */
-/*   Updated: 2026/04/26 17:35:56 by gabach           ###   ########.fr       */
+/*   Updated: 2026/04/26 19:40:28 by gabach           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ t_cell		generate_number(void)
 
 void	add_one_nbr(t_board *board)
 {
-	int	available_box[BOARD_MAX * BOARD_MAX];
+	int	available_box[BOARD_MAX * BOARD_MAX + 1];
 	int	row;
 	int col;
 	int index;
