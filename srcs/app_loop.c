@@ -6,7 +6,7 @@
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/25 02:38:23 by ldecavel          #+#    #+#             */
-/*   Updated: 2026/04/26 17:04:55 by ldecavel         ###   ########.fr       */
+/*   Updated: 2026/04/26 19:20:34 by ldecavel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 #include "signals.h"
 #include "render.h"
 #include "app.h"
+#include "board.h"
 #include "gameplay.h"
 
 extern t_errcode app_loop(void) {
@@ -30,7 +31,7 @@ extern t_errcode app_loop(void) {
 		.game_view = {.update = game_update, .render = game_render},
 		.end_view = {.update = end_update, .render = end_render},
 		.user_input = -1,
-		.board = {.size = 4},
+		.board = {.size = BOARD_MIN},
 		.state = (rand() % 2 == 0) << 5
 	};
 
