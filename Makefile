@@ -22,6 +22,7 @@ SRCS = \
 	app_loop.c \
 	helpers.c \
 	render/render.c \
+	render/font.c \
 	views/menu.c \
 	views/game.c \
 	views/end.c \

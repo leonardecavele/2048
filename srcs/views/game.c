@@ -6,7 +6,7 @@
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/25 02:57:57 by ldecavel          #+#    #+#             */
-/*   Updated: 2026/04/26 15:49:12 by gabach           ###   ########.fr       */
+/*   Updated: 2026/04/26 16:35:36 by gabach           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 #include "gameplay.h"
 #include "helpers.h"
 #include "app.h"
+#include "font.h"
 
 extern t_errcode game_update(t_app *app)
 {
@@ -124,7 +125,8 @@ static void	draw_board_values(
 				int v_y = cell_y + cell_h / 2;
 				int v_x = cell_x + (cell_w - len) / 2;
 				
-				mvprintw(v_y, v_x, "%u", (unsigned int)val);
+				if (draw_ascii_value(val, v_y, v_x, cell_h, cell_w))
+					mvprintw(v_y, v_x, "%u", (unsigned int)val);
 				attroff(COLOR_PAIR(pair));
 			}
 			x++;
