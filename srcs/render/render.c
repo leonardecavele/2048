@@ -6,7 +6,7 @@
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/25 02:37:28 by ldecavel          #+#    #+#             */
-/*   Updated: 2026/04/26 16:39:03 by ldecavel         ###   ########.fr       */
+/*   Updated: 2026/04/26 16:42:28 by ldecavel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,15 +65,6 @@ extern void render_too_small(t_app *app)
 	print_centered(app, r / 2, "Windows too small, please increase size");
 }
 
-extern void render_invalid_ratio(t_app *app)
-{
-	int r = app->screen.rows;
-	int c = app->screen.cols;
-
-	(void)c;
-	print_centered(app, r / 2, "Windows has an invalid ratio");
-}
-
 extern void render_frame(t_app *app, int y, int box_w, int box_h)
 {
 	int start_y = y - 1;
@@ -95,22 +86,6 @@ extern void render_frame(t_app *app, int y, int box_w, int box_h)
 	attroff(A_BOLD);
 }
 
-extern bool	screen_ratio_is_bad(t_app *app)
-{
-	int	r;
-	int	c;
-
-	r = app->screen.rows;
-	c = app->screen.cols;
-	if ((long)c * MAX_WIDTH_RATIO_DEN
-		> (long)r * MAX_WIDTH_RATIO_NUM * TERM_CHAR_RATIO)
-		return (true);
-	if ((long)c * MIN_WIDTH_RATIO_DEN
-		< (long)r * MIN_WIDTH_RATIO_NUM)
-		return (true);
-	return (false);
-}
-
 extern bool check_size(t_app *app)
 {
 	getmaxyx(stdscr, app->screen.rows, app->screen.cols);
@@ -120,11 +95,6 @@ extern bool check_size(t_app *app)
 
 	if (r < MIN_ROW || c < MIN_COL) {
 		render_too_small(app);
-		return false;
-	}
-
-	if (screen_ratio_is_bad(app)) {
-		render_invalid_ratio(app);
 		return false;
 	}
 
