@@ -6,7 +6,7 @@
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/26 14:04:09 by ldecavel          #+#    #+#             */
-/*   Updated: 2026/04/26 14:29:36 by gabach           ###   ########.fr       */
+/*   Updated: 2026/04/26 17:34:54 by gabach           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ typedef uint32_t t_cell;
 typedef struct s_board
 {
 	int size;
+	int last_modif;
 	t_cell	board[BOARD_MAX][BOARD_MAX];
 }	t_board;
 
