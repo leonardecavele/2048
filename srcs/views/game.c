@@ -6,7 +6,7 @@
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/25 02:57:57 by ldecavel          #+#    #+#             */
-/*   Updated: 2026/04/26 18:03:27 by gabach           ###   ########.fr       */
+/*   Updated: 2026/04/26 18:08:01 by gabach           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,7 @@ static void	draw_board_values(
 				attron(A_BOLD);
 				pair = draw_values_color(val, cell_y, cell_x, cell_h, cell_w);
 				int len = nbrlen(val);
-				int v_y = cell_y + cell_h / 2;
+				int v_y = cell_y + cell_h / 2 + 1;
 				int v_x = cell_x + (cell_w - len) / 2;
 				int current_idx = y * app->board.size + x;
 
