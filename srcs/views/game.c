@@ -6,7 +6,7 @@
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/25 02:57:57 by ldecavel          #+#    #+#             */
-/*   Updated: 2026/04/26 17:11:42 by ldecavel         ###   ########.fr       */
+/*   Updated: 2026/04/26 17:53:27 by ldecavel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,19 +102,13 @@ static void	draw_board_values(
 	t_app *app, int start_y, int start_x, int cell_h, int cell_w
 )
 {
-	int	y;
-	int	x;
 	int	cell_y;
 	int	cell_x;
 	int pair;
-	t_cell	val;
+	t_cell val;
 
-	y = 0;
-	while (y < app->board.size)
-	{
-		x = 0;
-		while (x < app->board.size)
-		{
+	for (int y = 0; y < app->board.size; y++) {
+		for (int x = 0; x < app->board.size; x++) {
 			val = app->board.board[y][x];
 			cell_y = start_y + y * cell_h;
 			cell_x = start_x + x * cell_w;
@@ -130,9 +124,7 @@ static void	draw_board_values(
 					mvprintw(v_y, v_x, "%u", (unsigned int)val);
 				attroff(COLOR_PAIR(pair));
 			}
-			x++;
 		}
-		y++;
 	}
 }
 
@@ -140,66 +132,47 @@ static void	draw_board_values(
 static chtype	get_grid_joint(int y, int x, int size)
 {
 	if (y == 0 && x == 0)
-		return (ACS_ULCORNER);
+		return ACS_ULCORNER;
 	if (y == 0 && x == size)
-		return (ACS_URCORNER);
+		return ACS_URCORNER;
 	if (y == size && x == 0)
-		return (ACS_LLCORNER);
+		return ACS_LLCORNER;
 	if (y == size && x == size)
-		return (ACS_LRCORNER);
+		return ACS_LRCORNER;
 	if (y == 0)
-		return (ACS_TTEE);
+		return ACS_TTEE;
 	if (y == size)
-		return (ACS_BTEE);
+		return ACS_BTEE;
 	if (x == 0)
-		return (ACS_LTEE);
+		return ACS_LTEE;
 	if (x == size)
-		return (ACS_RTEE);
-	return (ACS_PLUS);
+		return ACS_RTEE;
+	return ACS_PLUS;
 }
 
 static void	draw_grid_lines(int start_y, int start_x, int cell_h, int cell_w, int size)
 {
-	int	y;
-	int	x;
 	int	board_h;
 	int	board_w;
 
 	board_h = cell_h * size;
 	board_w = cell_w * size;
-	y = 0;
-	while (y <= size)
-	{
+	for (int y = 0; y <= size; y++)
 		mvhline(start_y + y * cell_h, start_x, ACS_HLINE, board_w);
-		y++;
-	}
-	x = 0;
-	while (x <= size)
-	{
+	for (int x = 0; x <= size; x++)
 		mvvline(start_y, start_x + x * cell_w, ACS_VLINE, board_h);
-		x++;
-	}
 }
 
 static void	draw_grid_joints(int start_y, int start_x, int cell_h, int cell_w, int size)
 {
-	int	y;
-	int	x;
-
-	y = 0;
-	while (y <= size)
-	{
-		x = 0;
-		while (x <= size)
-		{
+	for (int y = 0; y <= size; y++) {
+		for (int x = 0; int x <= size; x++) {
 			mvaddch(
 				start_y + y * cell_h,
 				start_x + x * cell_w,
 				get_grid_joint(y, x, size)
 			);
-			x++;
 		}
-		y++;
 	}
 }
 

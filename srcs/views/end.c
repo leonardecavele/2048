@@ -6,12 +6,13 @@
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/25 02:58:57 by ldecavel          #+#    #+#             */
-/*   Updated: 2026/04/26 16:40:25 by ldecavel         ###   ########.fr       */
+/*   Updated: 2026/04/26 17:54:21 by ldecavel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /* extern */
 #include <ncurses.h>
+#include <stdio.h>
 /* intern */
 #include "gameplay.h"
 #include "app.h"
@@ -64,13 +65,10 @@ static t_errcode	handle_name_input(t_app *app)
 extern t_errcode	end_update(t_app *app)
 {
 	app->user_input = getch();
-
 	if (app->user_input == ERR)
 		return NO_ERROR;
-
 	if (app->state & NAME_INPUT)
 		return handle_name_input(app);
-
 	if (app->user_input == 27)
 		app->state |= EXIT;
 	if (app->state & WIN
@@ -84,7 +82,6 @@ extern t_errcode	end_update(t_app *app)
 	if (!(app->state & DEFEAT) && !(app->state & SCORE_SAVED)
 		&& (app->user_input == 'c' || app->user_input == 'C'))
 		app->current_view = &app->game_view;
-
 	return NO_ERROR;
 }
 
@@ -146,13 +143,13 @@ static void	typing_score_name(char dst[11], const char *src)
 static void	render_name_input(t_app *app, int y)
 {
 	char	buffer[64];
+	char	name[11];
 
 	if (!(app->state & WIN))
 		return ;
 	if (app->state & SCORE_SAVED)
 		snprintf(buffer, sizeof(buffer), "NAME : %s", app->current_score.name);
 	else if (app->state & NAME_INPUT) {
-		char name[11];
 		typing_score_name(name, app->current_score.name);
 		snprintf(buffer, sizeof(buffer), "%s", name);
 	}
@@ -162,7 +159,6 @@ static void	render_name_input(t_app *app, int y)
 	print_centered(app, y, buffer);
 	attroff(A_BOLD);
 }
-
 
 static void	render_score(t_app *app, int y)
 {
@@ -182,9 +178,8 @@ static void	render_win_buttons(t_app *app, int y)
 		print_centered(app, y + 2, "  CONTINUE (C)  ");
 		print_centered(app, y + 4, "   EXIT (ESC)   ");
 	}
-	else {
+	else
 		print_centered(app, y + 0, "   EXIT (ESC)   ");
-	}
 	attroff(A_REVERSE | A_BOLD);
 }
 
@@ -203,45 +198,57 @@ static void	render_defeat_buttons(t_app *app, int y)
 	attroff(A_REVERSE | A_BOLD);
 }
 
-extern t_errcode end_render(t_app *app)
+static void	render_defeat_screen(t_app *app)
+{
+	int top = (app->screen.rows - 12) / 2;
+	render_frame(app, top, 41, 12);
+	render_defeat_title(app, top + 1);
+	render_score(app, top + 7);
+	render_defeat_buttons(app, top + 9);
+}
+
+static void	render_win_screen(t_app *app)
+{
+	int	box_height;
+	int	box_width;
+
+	box_height = 18;
+	if (app->state & SCORE_SAVED)
+		box_height -= 4;
+	box_width = 22;
+	if (app->state & END_MESSAGE_VER)
+		box_width = 30;
+	int top = (app->screen.rows - box_height) / 2;
+	render_frame(app, top, box_width, box_height);
+	if (app->state & END_MESSAGE_VER)
+		render_win(app, top + 1);
+	else
+		render_gg(app, top + 1);
+	render_score(app, top + 7);
+	render_name_input(app, top + 9);
+	render_win_buttons(app, top + 11);
+}
+
+static void	render_pause_screen(t_app *app)
+{
+	int top = (app->screen.rows - 14) / 2;
+	render_frame(app, top, 34, 14);
+	render_pause_title(app, top + 1);
+	render_score(app, top + 7);
+	render_pause_buttons(app, top + 9);
+}
+
+extern t_errcode	end_render(t_app *app)
 {
 	if (!check_size(app))
 		return NO_ERROR;
-
-	int	r = app->screen.rows;
-
 	erase();
-	if (app->state & DEFEAT) {
-		render_defeat_title(app, (r / 2) - 5);
-		render_frame(app, (r / 2) - 5, 41, 12);
-		render_score(app, (r / 2) + 1);
-		render_defeat_buttons(app, (r / 2) + 3);
-	}
-	else if (app->state & WIN) {
-		int box_height = 18;
-		if (app->state & SCORE_SAVED)
-			box_height -= 4;
-
-		if (app->state & END_MESSAGE_VER) {
-			render_win(app, (r / 2) - 6);
-			render_frame(app, (r / 2) - 6, 30, box_height);
-		}
-		else {
-			render_gg(app, (r / 2) - 6);
-			render_frame(app, (r / 2) - 6, 22, box_height);
-		}
-		render_score(app, (r / 2));
-		render_name_input(app, (r / 2) + 2);
-		render_win_buttons(app, (r / 2) + 4);
-	}
-	else {
-		render_pause_title(app, (r / 2) - 5);
-		render_frame(app, (r / 2) - 5, 34, 14);
-		render_score(app, (r / 2) + 1);
-		render_pause_buttons(app, (r / 2) + 3);
-	}
+	if (app->state & DEFEAT)
+		render_defeat_screen(app);
+	else if (app->state & WIN)
+		render_win_screen(app);
+	else
+		render_pause_screen(app);
 	refresh();
-
 	return NO_ERROR;
-
 }

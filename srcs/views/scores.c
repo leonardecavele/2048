@@ -6,7 +6,7 @@
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/25 02:58:57 by ldecavel          #+#    #+#             */
-/*   Updated: 2026/04/26 17:18:15 by ldecavel         ###   ########.fr       */
+/*   Updated: 2026/04/26 17:39:54 by ldecavel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,10 @@ extern t_errcode	scores_update(t_app *app)
 	app->user_input = getch();
 
 	if (app->user_input == ERR)
-		return (NO_ERROR);
+		return NO_ERROR;
 	if (app->user_input == 27)
 		app->current_view = &app->menu_view;
-	return (NO_ERROR);
+	return NO_ERROR;
 }
 
 static void	render_title(t_app *app, int y)
@@ -77,16 +77,14 @@ static void	render_scores(t_app *app, int y)
 
 extern t_errcode	scores_render(t_app *app)
 {
-	int	top;
-
 	if (!check_size(app))
-		return (NO_ERROR);
-	top = (app->screen.rows - 22) / 2;
+		return NO_ERROR;
+	int top = (app->screen.rows - 22) / 2;
 	erase();
 	render_frame(app, top + 1, 40, 22);
 	render_title(app, top + 1);
 	render_scores(app, top + 8);
 	render_play_button(app, top + 18);
 	refresh();
-	return (NO_ERROR);
+	return NO_ERROR;
 }
