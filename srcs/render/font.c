@@ -6,10 +6,13 @@
 /*   By: gabach <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/26 15:57:35 by gabach            #+#    #+#             */
-/*   Updated: 2026/04/26 16:43:02 by gabach           ###   ########.fr       */
+/*   Updated: 2026/04/26 19:59:57 by ldecavel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+/* extern */
+#include <stdio.h>
+/* intern */
 #include <ncurses.h>
 #include "font.h"
 
