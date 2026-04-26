@@ -6,7 +6,7 @@
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/25 02:58:57 by ldecavel          #+#    #+#             */
-/*   Updated: 2026/04/26 19:55:51 by ldecavel         ###   ########.fr       */
+/*   Updated: 2026/04/26 20:36:45 by ldecavel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,10 @@ extern t_errcode	menu_update(t_app *app)
 	if (app->user_input == '\n'
 		|| app->user_input == '\r'
 		|| app->user_input == 'p' || app->user_input == 'P')
+	{
+		init_board(&app->board);
 		app->current_view = &app->game_view;
+	}
 	if (app->user_input == 27)
 		app->state |= EXIT;
 	if (app->user_input == KEY_LEFT && app->board.size > BOARD_MIN)

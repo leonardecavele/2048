@@ -6,7 +6,7 @@
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/25 02:38:23 by ldecavel          #+#    #+#             */
-/*   Updated: 2026/04/26 19:20:34 by ldecavel         ###   ########.fr       */
+/*   Updated: 2026/04/26 20:36:07 by ldecavel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,6 @@ extern t_errcode app_loop(void) {
 	};
 
 	init_scores(&app);
-	init_board(&app.board);
-
 	errcode = parse_scores(&app);
 	if (errcode != NO_ERROR)
 		return errcode;
