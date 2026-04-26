@@ -6,7 +6,7 @@
 /*   By: gabach <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/25 12:54:20 by gabach            #+#    #+#             */
-/*   Updated: 2026/04/26 13:09:13 by gabach           ###   ########.fr       */
+/*   Updated: 2026/04/26 13:17:38 by gabach           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,15 +36,17 @@ t_cell	can_move(int coord1, int coord2, int combined[BOARD_SIZE], t_cell board[B
 	return (2);
 }
 
-void	move_left(t_app *app)
+int	move_left(t_app *app)
 {
 	int row;
 	int col;
 	int move;
 	int is_moving;
 	int combined[BOARD_SIZE];
+	int has_moved;
 
 	row = 0;
+	has_moved = 0;
 	while (row < BOARD_SIZE)
 	{
 		col = 1;
@@ -65,6 +67,8 @@ void	move_left(t_app *app)
 						combined,
 						app->board
 					);
+				if (is_moving && !has_moved)
+					has_moved = 1;
 				if (is_moving == 1)
 					app->board[row][move - 1] = app->board[row][move];
 				else if (is_moving == 2)
@@ -84,13 +88,16 @@ void	move_left(t_app *app)
 		}
 		row++;
 	}
+	return (has_moved);
 }
 
-void	move_right(t_app *app)
+int	move_right(t_app *app)
 {
 	int row, col, move, is_moving;
 	int combined[BOARD_SIZE];
+	int has_moved;
 
+	has_moved = 0;
 	row = 0;
 	while (row < BOARD_SIZE)
 	{
@@ -104,6 +111,8 @@ void	move_right(t_app *app)
 				while (move < BOARD_SIZE - 1)
 				{
 					is_moving = can_move(row * BOARD_SIZE + move, row * BOARD_SIZE + move + 1, combined, app->board);
+					if (is_moving && !has_moved)
+						has_moved = 1;
 					if (is_moving == 1)
 						app->board[row][move + 1] = app->board[row][move];
 					else if (is_moving == 2)
@@ -122,13 +131,16 @@ void	move_right(t_app *app)
 		}
 		row++;
 	}
+	return (has_moved);
 }
 
-void	move_up(t_app *app)
+int	move_up(t_app *app)
 {
 	int row, col, move, is_moving;
 	int combined[BOARD_SIZE];
+	int has_moved;
 
+	has_moved = 0;
 	col = 0;
 	while (col < BOARD_SIZE)
 	{
@@ -142,6 +154,8 @@ void	move_up(t_app *app)
 				while (move > 0)
 				{
 					is_moving = can_move(move * BOARD_SIZE + col, (move - 1) * BOARD_SIZE + col, combined, app->board);
+					if (is_moving && !has_moved)
+						has_moved = 1;
 					if (is_moving == 1)
 						app->board[move - 1][col] = app->board[move][col];
 					else if (is_moving == 2)
@@ -160,13 +174,16 @@ void	move_up(t_app *app)
 		}
 		col++;
 	}
+	return (has_moved);
 }
 
-void	move_down(t_app *app)
+int	move_down(t_app *app)
 {
 	int row, col, move, is_moving;
 	int combined[BOARD_SIZE];
+	int has_moved;
 
+	has_moved = 0;
 	col = 0;
 	while (col < BOARD_SIZE)
 	{
@@ -180,6 +197,8 @@ void	move_down(t_app *app)
 				while (move < BOARD_SIZE - 1)
 				{
 					is_moving = can_move(move * BOARD_SIZE + col, (move + 1) * BOARD_SIZE + col, combined, app->board);
+					if (is_moving && !has_moved)
+						has_moved = 1;
 					if (is_moving == 1)
 						app->board[move + 1][col] = app->board[move][col];
 					else if (is_moving == 2)
@@ -198,4 +217,5 @@ void	move_down(t_app *app)
 		}
 		col++;
 	}
+	return (has_moved);
 }

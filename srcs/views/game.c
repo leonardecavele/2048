@@ -6,7 +6,7 @@
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/25 02:57:57 by ldecavel          #+#    #+#             */
-/*   Updated: 2026/04/26 12:57:18 by gabach           ###   ########.fr       */
+/*   Updated: 2026/04/26 13:18:28 by gabach           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,20 +39,20 @@ extern t_errcode game_update(t_app *app)
 		app->current_view = &app->end_view;
 
 	if (app->user_input == KEY_UP) {
-		move_up(app);
-		add_one_nbr(app->board);
+		if (move_up(app))
+			add_one_nbr(app->board);
 	}
 	else if (app->user_input == KEY_DOWN) {
-		move_down(app);
-		add_one_nbr(app->board);
+		if (move_down(app))
+			add_one_nbr(app->board);
 	}
 	else if (app->user_input == KEY_LEFT) {
-		move_left(app);
-		add_one_nbr(app->board);
+		if (move_left(app))
+			add_one_nbr(app->board);
 	}
 	else if (app->user_input == KEY_RIGHT) {
-		move_right(app);
-		add_one_nbr(app->board);
+		if (move_right(app))
+			add_one_nbr(app->board);
 	}
 
 	return NO_ERROR;
