@@ -6,7 +6,7 @@
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/25 02:38:23 by ldecavel          #+#    #+#             */
-/*   Updated: 2026/04/25 21:48:25 by ldecavel         ###   ########.fr       */
+/*   Updated: 2026/04/26 12:25:51 by ldecavel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,9 @@
 #include "render.h"
 #include "app.h"
 
-extern void app_loop(void) {
+extern t_errcode app_loop(void) {
+	t_errcode errcode = NO_ERROR;
+
 	t_app app = {
 		.menu_view = {
 			.update = menu_update,
@@ -39,12 +41,16 @@ extern void app_loop(void) {
 	init_board(app.board);
 
 	app.current_view = &app.menu_view;
-	while (!must_exit() && !app.exit)
-	{
+	while (!must_exit() && !app.exit) {
 		if (must_resize())
 			handle_resize();
 
-		app.current_view->update(&app);
-		app.current_view->render(&app);
+		errcode |= app.current_view->update(&app);
+		if (errcode != NO_ERROR)
+			return errcode;
+		errcode |= app.current_view->render(&app);
+		if (errcode != NO_ERROR)
+			return errcode;
 	}
+	return errcode;
 }

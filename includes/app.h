@@ -19,6 +19,10 @@ typedef struct s_app
 	bool		end_message_ver;
 	bool		win;
 	bool		defeat;
+	char		score_name[11];
+	int			score_name_len;
+	bool		name_input;
+	bool		score_saved;
 }	t_app;
 
 #endif
