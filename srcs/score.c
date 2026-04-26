@@ -6,7 +6,7 @@
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/26 14:21:02 by ldecavel          #+#    #+#             */
-/*   Updated: 2026/04/26 15:56:28 by ldecavel         ###   ########.fr       */
+/*   Updated: 2026/04/26 16:14:32 by ldecavel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,10 @@ extern t_errcode save_score(t_app *app)
 {
 	int worst_index = get_worst_index(app);
 
-	if (app->current_score.score <= app->scores[worst_index].score)
+	if (app->current_score.score <= app->scores[worst_index].score) {
+		app->state |= SCORE_SAVED;
 		return NO_ERROR;
+	}
 
 	snprintf(
 		app->scores[worst_index].name,
@@ -70,6 +72,27 @@ extern t_errcode save_score(t_app *app)
 
 	app->state |= SCORE_SAVED;
 	return NO_ERROR;
+}
+
+extern void init_scores(t_app *app)
+{
+	for (int i = 0; i < 10; i++) {
+		app->scores[i].score = DEFAULT_SCORE;
+		snprintf(
+			app->scores[i].name,
+			sizeof(app->scores[i].name),
+			"%s", DEFAULT_NAME
+		);
+	}
+}
+
+static bool is_valid_score_name(const char *name)
+{
+	for (int i = 0; name[i] != '\0'; i++) {
+		if (name[i] < 'A' || name[i] > 'Z')
+			return false;
+	}
+	return true;
 }
 
 extern t_errcode parse_scores(t_app *app)
@@ -94,6 +117,12 @@ extern t_errcode parse_scores(t_app *app)
 			if (fclose(file) == EOF)
 				return FILE_ERROR | PARSE_ERROR;
 			return PARSE_ERROR;
+		}
+
+		if (!is_valid_score_name(app->scores[i].name)) {
+			if (fclose(file) == EOF)
+				return FILE_ERROR | PARSE_NAME_ERROR;
+			return PARSE_NAME_ERROR;
 		}
 	}
 

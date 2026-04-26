@@ -6,7 +6,7 @@
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/16 13:01:36 by ldecavel          #+#    #+#             */
-/*   Updated: 2026/04/26 15:04:08 by ldecavel         ###   ########.fr       */
+/*   Updated: 2026/04/26 16:13:55 by ldecavel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,5 +52,7 @@ extern t_errcode	errcode_message(t_errcode errcode)
 		ft_dprintf(2, "error while registering scores\n");
 	if (errcode & PARSE_ERROR)
 		ft_dprintf(2, "error while parsing scores\n");
+	if (errcode & PARSE_NAME_ERROR)
+		ft_dprintf(2, "error while parsing scores: invalid name\n");
 	return (errcode);
 }
