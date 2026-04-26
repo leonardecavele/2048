@@ -6,7 +6,7 @@
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/26 14:04:09 by ldecavel          #+#    #+#             */
-/*   Updated: 2026/04/26 17:34:54 by gabach           ###   ########.fr       */
+/*   Updated: 2026/04/26 19:07:36 by ldecavel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #define BOARD_H
 
 #define BOARD_MIN 4
-#define BOARD_MAX 16
+#define BOARD_MAX 6
 
 #include <stdint.h>
 
