@@ -6,7 +6,7 @@
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/25 02:37:28 by ldecavel          #+#    #+#             */
-/*   Updated: 2026/04/26 18:25:22 by gabach           ###   ########.fr       */
+/*   Updated: 2026/04/26 19:57:05 by ldecavel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,8 @@ extern void render_too_small(t_app *app)
 	int c = app->screen.cols;
 
 	(void)c;
-	print_centered(app, r / 2, "Windows too small, please increase size");
+	print_centered(app, r / 2, "Windows too small");
+	print_centered(app, (r / 2) + 1, "Please increase size");
 }
 
 extern void render_frame(t_app *app, int y, int box_w, int box_h)
