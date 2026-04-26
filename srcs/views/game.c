@@ -6,7 +6,7 @@
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/25 02:57:57 by ldecavel          #+#    #+#             */
-/*   Updated: 2026/04/26 18:27:55 by gabach           ###   ########.fr       */
+/*   Updated: 2026/04/26 18:51:38 by gabach           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,23 @@ static int draw_values_color(
 	return pair;
 }
 
+static bool is_ascii_possible(t_app *app)
+{
+	int r = app->screen.rows;
+	int c = app->screen.cols;
+
+	int	nbr_size = ART_WIDTH * 5;
+
+	if (app->board.size != 4)
+		return false;
+
+	if ((r - 1) / app->board.size >= nbr_size &&
+			(c - 1) / app->board.size >= nbr_size)
+		return true;
+
+	return false;
+}
+
 static void	draw_board_values(
 	t_app *app, int start_y, int start_x, int cell_h, int cell_w
 )
@@ -132,7 +149,7 @@ static void	draw_board_values(
 					pair = 20;
 					attron(A_BLINK | COLOR_PAIR(20));
 				}
-				if (draw_ascii_value(val, v_y, v_x, cell_h, cell_w))
+				if (!is_ascii_possible(app) || draw_ascii_value(val, v_y, v_x, cell_h, cell_w))
 					mvprintw(v_y, v_x, "%u", (unsigned int)val);
 
 				if (current_idx == app->board.last_modif)
