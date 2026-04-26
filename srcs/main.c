@@ -6,7 +6,7 @@
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/25 01:51:37 by ldecavel          #+#    #+#             */
-/*   Updated: 2026/04/26 14:07:53 by ldecavel         ###   ########.fr       */
+/*   Updated: 2026/04/26 19:54:30 by ldecavel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,12 @@
 #include "app_loop.h"
 
 
-int	main(void)
+int	main(int ac, char **av)
 {
+	(void)av;
+	if (ac != 1)
+		return (errcode_message(ARG_COUNT_ERROR));
+
 	t_errcode errcode = NO_ERROR;
 
 	errcode |= ncurses_init();
