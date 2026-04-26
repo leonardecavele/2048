@@ -6,7 +6,7 @@
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/25 12:21:20 by ldecavel          #+#    #+#             */
-/*   Updated: 2026/04/26 16:48:19 by ldecavel         ###   ########.fr       */
+/*   Updated: 2026/04/26 17:02:44 by ldecavel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 #define MIN_WIDTH_RATIO_DEN		10
 
 #define MIN_COL 40
-#define MIN_ROW 30
+#define MIN_ROW 22
 
 typedef struct s_app t_app;
 
