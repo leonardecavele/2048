@@ -1,7 +1,6 @@
 # structure
 NAME = 2048
 LIBFT_A = $(LIBFT_DIR)/libft.a
-SIZE ?= 4
 
 # directories 
 SRCS_DIR = srcs
@@ -11,7 +10,7 @@ LIBFT_DIR = libft
 
 # flags
 CC = cc
-CFLAGS = -MMD -MP -Wall -Wextra -Werror -I $(INC_DIR) -I $(LIBFT_DIR)/includes -D BOARD_SIZE=$(SIZE)
+CFLAGS = -MMD -MP -Wall -Wextra -Werror -I $(INC_DIR) -I $(LIBFT_DIR)/includes
 LINK := -lncurses
 
 # files

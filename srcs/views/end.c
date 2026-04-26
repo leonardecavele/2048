@@ -6,7 +6,7 @@
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/25 02:58:57 by ldecavel          #+#    #+#             */
-/*   Updated: 2026/04/26 17:54:21 by ldecavel         ###   ########.fr       */
+/*   Updated: 2026/04/26 19:00:04 by ldecavel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -201,8 +201,8 @@ static void	render_defeat_buttons(t_app *app, int y)
 static void	render_defeat_screen(t_app *app)
 {
 	int top = (app->screen.rows - 12) / 2;
-	render_frame(app, top, 41, 12);
-	render_defeat_title(app, top + 1);
+	render_frame(app, top, 40, 12);
+	render_defeat_title(app, top);
 	render_score(app, top + 7);
 	render_defeat_buttons(app, top + 9);
 }
@@ -221,9 +221,9 @@ static void	render_win_screen(t_app *app)
 	int top = (app->screen.rows - box_height) / 2;
 	render_frame(app, top, box_width, box_height);
 	if (app->state & END_MESSAGE_VER)
-		render_win(app, top + 1);
+		render_win(app, top);
 	else
-		render_gg(app, top + 1);
+		render_gg(app, top);
 	render_score(app, top + 7);
 	render_name_input(app, top + 9);
 	render_win_buttons(app, top + 11);
@@ -233,7 +233,7 @@ static void	render_pause_screen(t_app *app)
 {
 	int top = (app->screen.rows - 14) / 2;
 	render_frame(app, top, 34, 14);
-	render_pause_title(app, top + 1);
+	render_pause_title(app, top);
 	render_score(app, top + 7);
 	render_pause_buttons(app, top + 9);
 }
