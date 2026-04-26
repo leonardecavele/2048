@@ -6,7 +6,7 @@
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/25 02:58:57 by ldecavel          #+#    #+#             */
-/*   Updated: 2026/04/26 15:30:12 by ldecavel         ###   ########.fr       */
+/*   Updated: 2026/04/26 15:38:12 by ldecavel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,19 +20,19 @@
 
 static void	add_name_char(t_app *app, int ch)
 {
-	if (app->score_name_len >= 10)
+	if (app->current_score_name_len >= 10)
 		return ;
-	app->score_name[app->score_name_len] = ch;
-	app->score_name_len++;
-	app->score_name[app->score_name_len] = '\0';
+	app->current_score.name[app->current_score_name_len] = ch;
+	app->current_score_name_len++;
+	app->current_score.name[app->current_score_name_len] = '\0';
 }
 
 static void	remove_name_char(t_app *app)
 {
-	if (app->score_name_len <= 0)
+	if (app->current_score_name_len <= 0)
 		return ;
-	app->score_name_len--;
-	app->score_name[app->score_name_len] = '\0';
+	app->current_score_name_len--;
+	app->current_score.name[app->current_score_name_len] = '\0';
 }
 
 static t_errcode	handle_name_input(t_app *app)
@@ -40,7 +40,7 @@ static t_errcode	handle_name_input(t_app *app)
 	if (app->user_input == '\n'
 		|| app->user_input == '\r'
 		|| app->user_input == KEY_ENTER) {
-		if (app->score_name_len > 0) {
+		if (app->current_score_name_len > 0) {
 			app->name_input = false;
 			return save_score(app);
 		}
@@ -76,8 +76,8 @@ extern t_errcode	end_update(t_app *app)
 	if (app->win == true
 		&& app->score_saved == false
 		&& (app->user_input == 's' || app->user_input == 'S')) {
-		app->score_name_len = 0;
-		app->score_name[0] = '\0';
+		app->current_score_name_len = 0;
+		app->current_score.name[0] = '\0';
 		app->name_input = true;
 		return NO_ERROR;
 	}
@@ -150,10 +150,10 @@ static void	render_name_input(t_app *app, int y)
 	if (app->win == false)
 		return ;
 	if (app->score_saved)
-		snprintf(buffer, sizeof(buffer), "NAME : %s", app->score_name);
+		snprintf(buffer, sizeof(buffer), "NAME : %s", app->current_score.name);
 	else if (app->name_input) {
 		char name[11];
-		typing_score_name(name, app->score_name);
+		typing_score_name(name, app->current_score.name);
 		snprintf(buffer, sizeof(buffer), "%s", name);
 	}
 	else
@@ -168,7 +168,7 @@ static void	render_score(t_app *app, int y)
 {
 	char	buffer[64];
 
-	snprintf(buffer, sizeof(buffer), "SCORE : %ld", app->score);
+	snprintf(buffer, sizeof(buffer), "SCORE : %ld", app->current_score.score);
 	attron(A_BOLD);
 	print_centered(app, y, buffer);
 	attroff(A_BOLD);

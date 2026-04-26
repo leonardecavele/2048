@@ -6,7 +6,7 @@
 /*   By: gabach <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/26 12:56:06 by gabach            #+#    #+#             */
-/*   Updated: 2026/04/26 15:31:44 by ldecavel         ###   ########.fr       */
+/*   Updated: 2026/04/26 15:37:53 by ldecavel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,15 @@
 #include <stdbool.h>
 #include "score.h"
 
+typedef enum e_state {
+	WIN = (1 << 0),
+	EXIT = (1 << 1),
+	DEFEAT = (1 << 2),
+	NAME_INPUT = (1 << 3),
+	SCORE_SAVED = (1 << 4),
+	END_MESSAGE_VER = (1 << 5)
+}	t_state;
+
 /* do other structures */
 typedef struct s_app
 {
@@ -30,21 +39,10 @@ typedef struct s_app
 	t_view		*current_view;
 	t_screen	screen;
 	int			user_input;
-
-	bool		end_message_ver;
-
-	/* state */
-	bool		win;
-	bool		exit;
-	bool		defeat;
-
-	/* score */
+	int64_t		state;
 	t_score		scores[10];
-	char		score_name[11];
-	int64_t		score;
-	int			score_name_len;
-	bool		name_input;
-	bool		score_saved;
+	t_score		current_score;
+	int			current_score_name_len;
 }	t_app;
 
 #endif

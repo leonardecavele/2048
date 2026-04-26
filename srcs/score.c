@@ -6,7 +6,7 @@
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/26 14:21:02 by ldecavel          #+#    #+#             */
-/*   Updated: 2026/04/26 15:32:10 by ldecavel         ###   ########.fr       */
+/*   Updated: 2026/04/26 15:39:04 by ldecavel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,15 +54,15 @@ extern t_errcode save_score(t_app *app)
 {
 	int worst_index = get_worst_index(app);
 
-	if (app->score <= app->scores[worst_index].score)
+	if (app->current_score.score <= app->scores[worst_index].score)
 		return NO_ERROR;
 
 	snprintf(
 		app->scores[worst_index].name,
 		sizeof(app->scores[worst_index].name),
-		"%s", app->score_name
+		"%s", app->current_score.name
 	);
-	app->scores[worst_index].score = app->score;
+	app->scores[worst_index].score = app->current_score.score;
 
 	t_errcode errcode = write_scores(app);
 	if (errcode != NO_ERROR)
