@@ -6,7 +6,7 @@
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/25 02:57:57 by ldecavel          #+#    #+#             */
-/*   Updated: 2026/04/26 14:55:00 by gabach           ###   ########.fr       */
+/*   Updated: 2026/04/26 15:49:12 by gabach           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,43 @@ extern t_errcode game_update(t_app *app)
 	return NO_ERROR;
 }
 
+static int draw_values_color(
+	t_cell value, int y, int x, int cell_h, int cell_w
+)
+{
+	int pair;
+	
+	switch (value)
+	{
+		case 2:    pair = 1; break;
+		case 4:    pair = 2; break;
+		case 8:    pair = 3; break;
+		case 16:   pair = 4; break;
+		case 32:   pair = 5; break;
+		case 64:   pair = 6; break;
+		case 128:  pair = 7; break;
+		case 256:  pair = 8; break;
+		case 512:  pair = 9; break;
+		case 1024: pair = 10; break;
+		case 2048: pair = 11; break;
+		case 4096: pair = 12; break;
+		default:   pair = 13; break;
+	}
+	
+	attron(COLOR_PAIR(pair));
+	
+	// Fill the cell with colored background
+	int i, j;
+	for (i = 1; i < cell_h; i++)
+	{
+		for (j = 2; j < cell_w - 1; j++)
+		{
+			mvaddch(y + i, x + j, ' ');
+		}
+	}
+	
+	return pair;
+}
 
 static void	draw_board_values(
 	t_app *app, int start_y, int start_x, int cell_h, int cell_w
@@ -65,9 +102,10 @@ static void	draw_board_values(
 {
 	int	y;
 	int	x;
-	int	value_y;
-	int	value_x;
-	int	len;
+	int	cell_y;
+	int	cell_x;
+	int pair;
+	t_cell	val;
 
 	y = 0;
 	while (y < app->board.size)
@@ -75,13 +113,19 @@ static void	draw_board_values(
 		x = 0;
 		while (x < app->board.size)
 		{
-			if (app->board.board[y][x] != 0)
+			val = app->board.board[y][x];
+			cell_y = start_y + y * cell_h;
+			cell_x = start_x + x * cell_w;
+
+			if (val != 0)
 			{
-				len = nbrlen(app->board.board[y][x]);
-				value_y = start_y + y * cell_h + cell_h / 2;
-				value_x = start_x + x * cell_w + (cell_w - len) / 2;
-				mvprintw(value_y, value_x, "%u",
-					(unsigned int)app->board.board[y][x]);
+				pair = draw_values_color(val, cell_y, cell_x, cell_h, cell_w);
+				int len = nbrlen(val);
+				int v_y = cell_y + cell_h / 2;
+				int v_x = cell_x + (cell_w - len) / 2;
+				
+				mvprintw(v_y, v_x, "%u", (unsigned int)val);
+				attroff(COLOR_PAIR(pair));
 			}
 			x++;
 		}
