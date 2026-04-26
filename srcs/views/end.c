@@ -6,7 +6,7 @@
 /*   By: ldecavel <ldecavel@student.42lyon.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/04/25 02:58:57 by ldecavel          #+#    #+#             */
-/*   Updated: 2026/04/26 12:33:00 by ldecavel         ###   ########.fr       */
+/*   Updated: 2026/04/26 12:36:47 by ldecavel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ extern t_errcode	end_update(t_app *app)
 		app->name_input = true;
 		return (NO_ERROR);
 	}
-	if (!app->defeat
+	if (!app->defeat && !app->score_saved
 		&& (app->user_input == 'c' || app->user_input == 'C'))
 		app->current_view = &app->game_view;
 
@@ -199,8 +199,7 @@ static void	render_win_buttons(t_app *app, int y)
 		print_centered(app, y + 4, "   EXIT (ESC)   ");
 	}
 	else {
-		print_centered(app, y + 0, "  CONTINUE (C)  ");
-		print_centered(app, y + 2, "   EXIT (ESC)   ");
+		print_centered(app, y + 0, "   EXIT (ESC)   ");
 	}
 	attroff(A_REVERSE | A_BOLD);
 }
@@ -236,7 +235,7 @@ extern t_errcode end_render(t_app *app)
 	else if (app->win == true) {
 		int box_height = 18;
 		if (app->score_saved == true)
-			box_height -= 2;
+			box_height -= 4;
 
 		if (app->end_message_ver) {
 			render_win(app, (r / 2) - 6);
@@ -259,4 +258,5 @@ extern t_errcode end_render(t_app *app)
 	refresh();
 
 	return NO_ERROR;
+
 }
